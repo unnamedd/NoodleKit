@@ -36,6 +36,7 @@ enum
 	NoodleStickyRowTransitionFadeIn
 };
 
+void NoodleClearRect(NSRect rect);
 
 @interface NSTableView (NoodleExtensions)
 
