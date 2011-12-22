@@ -47,9 +47,12 @@
 	NSColor				*_textColor;
 	NSColor				*_alternateTextColor;
 	NSColor				*_backgroundColor;
+    float               value;
 }
 
 - (id)initWithScrollView:(NSScrollView *)aScrollView;
+
+- (id)initWithScrollView:(NSScrollView *)scrollView orientation:(NSRulerOrientation)orientation;
 
 - (void)setFont:(NSFont *)aFont;
 - (NSFont *)font;
