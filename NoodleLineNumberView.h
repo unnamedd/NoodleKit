@@ -54,10 +54,10 @@
 	NSColor				*_backgroundColor;
 }
 
-@property (readwrite, retain) NSFont    *font;
-@property (readwrite, retain) NSColor   *textColor;
-@property (readwrite, retain) NSColor   *alternateTextColor;
-@property (readwrite, retain) NSColor   *backgroundColor;
+@property (readwrite, strong) NSFont    *font;
+@property (readwrite, strong) NSColor   *textColor;
+@property (readwrite, strong) NSColor   *alternateTextColor;
+@property (readwrite, strong) NSColor   *backgroundColor;
 
 - (id)initWithScrollView:(NSScrollView *)aScrollView;
 

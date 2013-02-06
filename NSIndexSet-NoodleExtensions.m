@@ -39,7 +39,7 @@
 
 + enumeratorWithIndexSet:(NSIndexSet *)set
 {
-	return [[[[self class] alloc] initWithIndexSet:set] autorelease];
+	return [[[self class] alloc] initWithIndexSet:set];
 }
 
 - initWithIndexSet:(NSIndexSet *)set
@@ -59,14 +59,8 @@
 {
 	free(_indexes);
 	_indexes = NULL;
-	[super dealloc];
 }
 
-- (void)finalize
-{
-	free(_indexes);
-	[super finalize];
-}
 
 - (NSUInteger)nextIndex
 {

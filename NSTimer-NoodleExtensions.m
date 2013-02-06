@@ -38,7 +38,7 @@ static char observerKey;
 {
 	__block NSTimer		*timer;
 	
-	timer = [[[NSTimer alloc] initWithAbsoluteFireDate:fireDate target:target selector:aSelector userInfo:userInfo] autorelease];
+	timer = [[NSTimer alloc] initWithAbsoluteFireDate:fireDate target:target selector:aSelector userInfo:userInfo];
 	
 	if (timer != nil)
 	{
@@ -93,7 +93,7 @@ static char observerKey;
 
 	if (self != nil)
 	{
-		__block NSTimer		*blockSelf;
+		__weak NSTimer		*blockSelf;
 		id					observer;
 		
 		blockSelf = self;

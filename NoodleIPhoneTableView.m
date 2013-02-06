@@ -100,7 +100,6 @@
 					endingColor:[NSColor colorWithCalibratedRed:0.665 green:0.706 blue:0.738 alpha:0.9]];
 		
 		[gradient drawInRect:rowRect angle:90];
-		[gradient release];
 
 		textShadow = [[NSShadow alloc] init];
 		[textShadow setShadowOffset:NSMakeSize(1.0, -1.0)];
@@ -115,7 +114,6 @@
 													 [NSColor whiteColor],
 													 NSForegroundColorAttributeName,
 													 nil];
-		[textShadow release];
 		
 		count = [self numberOfColumns];
 		for (colIndex = 0; colIndex < count; colIndex++)
@@ -129,7 +127,6 @@
 			[cell setAttributedStringValue:attrString];
 			[cell drawWithFrame:cellRect inView:self];
 			
-			[attrString release];
 		}
 		
 		[[NSColor colorWithCalibratedWhite:0.5 alpha:1.0] set];

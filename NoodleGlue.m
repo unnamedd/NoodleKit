@@ -41,7 +41,7 @@
 
 + (NoodleGlue *)glueWithBlock:(NoodleGlueBlock)glueBlock cleanupBlock:(NoodleGlueCleanupBlock)cleanupBlock
 {
-	return [[[NoodleGlue alloc] initWithBlock:glueBlock cleanupBlock:cleanupBlock] autorelease];
+	return [[NoodleGlue alloc] initWithBlock:glueBlock cleanupBlock:cleanupBlock];
 }
 
 - (id)initWithBlock:(NoodleGlueBlock)glueBlock cleanupBlock:(NoodleGlueCleanupBlock)cleanupBlock
@@ -61,21 +61,9 @@
 		_cleanupBlock(self);
 	}
 	
-	[_glueBlock release];
-	[_cleanupBlock release];
 	
-	[super dealloc];
 }
 
-- (void)finalize
-{
-	if (_cleanupBlock != NULL)
-	{
-		_cleanupBlock(self);
-	}
-	
-	[super finalize];
-}
 
 - (void)invoke:(id)object
 {
@@ -116,7 +104,6 @@ static char cleanupGlueKey;
 	key = [NSString stringWithFormat:@"%p", glue];
 	[glueTable setObject:glue forKey:key];
 	
-	[glue release];
 	
 	return key;
 }

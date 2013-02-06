@@ -15,7 +15,7 @@
 
 + (id)imageRepWithDrawBlock:(void (^)(NoodleCustomImageRep *))block
 {
-    return [[[[self class] alloc] initWithDrawBlock:block] autorelease];
+    return [[[self class] alloc] initWithDrawBlock:block];
 }
 
 - (id)initWithDrawBlock:(void (^)(NoodleCustomImageRep *))block
@@ -41,12 +41,6 @@
 	return copy;
 }
 
-- (void)dealloc
-{
-    [self setDrawBlock:nil];
-    
-    [super dealloc];
-}
 
 #pragma mark NSImageRep methods
 

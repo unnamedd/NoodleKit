@@ -38,7 +38,7 @@
 @interface NoodleRowSpanningCell : NSCell
 {
 	NSRect			_fullFrame;
-	NSCell			*_cell;
+	NSCell			*__weak _cell;
 	NSImage			*_cachedImage;
 	NSColor			*_backgroundColor;
 	NSInteger		_startIndex;
@@ -48,7 +48,7 @@
 }
 
 @property NSRect fullFrame;
-@property (assign) NSCell *cell;
+@property (weak) NSCell *cell;
 @property (copy) NSColor *backgroundColor;
 @property NSInteger startIndex;
 @property NSInteger endIndex;
@@ -75,10 +75,7 @@
 - (void)dealloc
 {
 	[self _clearOutCaches];
-	[_backgroundColor release];
-	[_cachedImage release];
 	
-	[super dealloc];
 }
 
 - (id)copyWithZone:(NSZone *)zone
@@ -106,7 +103,6 @@
 		
 		if ((_cachedImage == nil) || !NSEqualSizes(_fullFrame.size, [_cachedImage size]))
 		{
-			[_cachedImage release];
 			_cachedImage = [[NSImage alloc] initWithSize:_fullFrame.size];
 			[_cachedImage setFlipped:[controlView isFlipped]];
 		}
@@ -186,11 +182,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[_cell release];
-	[super dealloc];
-}
 
 - (NoodleRowSpanningCell *)spanningCell
 {

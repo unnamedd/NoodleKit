@@ -47,7 +47,6 @@
     [animation setAnimationCurve:NSAnimationLinear];
     [animation startAnimation];
     
-    [animation release];
 }
 
 - (NSWindow *)_createZoomWindowWithRect:(NSRect)rect
@@ -102,8 +101,6 @@
     [imageView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
     
     [zoomWindow setContentView:imageView];
-    [image release];	
-    [imageView release];
     
     // Reset one shot flag
     [self setOneShot:isOneShot];

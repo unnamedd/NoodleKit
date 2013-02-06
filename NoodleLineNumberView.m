@@ -78,14 +78,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    [_lineIndices release];
-	[_linesToMarkers release];
-    [_font release];
-    [_textColor release];
-    [_alternateTextColor release];
-    [_backgroundColor release];
     
-    [super dealloc];
 }
 
 - (NSFont *)defaultFont
@@ -556,17 +549,17 @@
 	{
 		if ([decoder allowsKeyedCoding])
 		{
-			_font = [[decoder decodeObjectForKey:NOODLE_FONT_CODING_KEY] retain];
-			_textColor = [[decoder decodeObjectForKey:NOODLE_TEXT_COLOR_CODING_KEY] retain];
-			_alternateTextColor = [[decoder decodeObjectForKey:NOODLE_ALT_TEXT_COLOR_CODING_KEY] retain];
-			_backgroundColor = [[decoder decodeObjectForKey:NOODLE_BACKGROUND_COLOR_CODING_KEY] retain];
+			_font = [decoder decodeObjectForKey:NOODLE_FONT_CODING_KEY];
+			_textColor = [decoder decodeObjectForKey:NOODLE_TEXT_COLOR_CODING_KEY];
+			_alternateTextColor = [decoder decodeObjectForKey:NOODLE_ALT_TEXT_COLOR_CODING_KEY];
+			_backgroundColor = [decoder decodeObjectForKey:NOODLE_BACKGROUND_COLOR_CODING_KEY];
 		}
 		else
 		{
-			_font = [[decoder decodeObject] retain];
-			_textColor = [[decoder decodeObject] retain];
-			_alternateTextColor = [[decoder decodeObject] retain];
-			_backgroundColor = [[decoder decodeObject] retain];
+			_font = [decoder decodeObject];
+			_textColor = [decoder decodeObject];
+			_alternateTextColor = [decoder decodeObject];
+			_backgroundColor = [decoder decodeObject];
 		}
 		
 		_linesToMarkers = [[NSMutableDictionary alloc] init];

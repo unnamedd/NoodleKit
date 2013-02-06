@@ -76,7 +76,7 @@
 	{
 		NSImage		*newImage;
 		
-		newImage = [[[NSImage alloc] initWithSize:[self size]] autorelease];
+		newImage = [[NSImage alloc] initWithSize:[self size]];
 		[newImage lockFocus];
 		[self drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeCopy fraction:1.0];
 		[newImage unlockFocus];

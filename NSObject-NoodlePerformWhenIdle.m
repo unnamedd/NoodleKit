@@ -33,7 +33,7 @@ CG_EXTERN CFTimeInterval CGEventSourceSecondsSinceLastEventType( CGEventSourceSt
 
 
 // Semi-private method. Used by the public methods
-- (void)performSelector:(SEL)aSelector withObject:(id)anArgument afterSystemIdleTime:(NSTimeInterval)delay withinTimeLimit:(NSTimeInterval)maxTime startTime:(NSTimeInterval)startTime
+- (void)performSelector:(SEL)aSelector withObject:(__unsafe_unretained id)anArgument afterSystemIdleTime:(NSTimeInterval)delay withinTimeLimit:(NSTimeInterval)maxTime startTime:(NSTimeInterval)startTime
 {
 	CFTimeInterval	idleTime;
 	NSTimeInterval	timeSinceInitialCall;	
@@ -44,7 +44,10 @@ CG_EXTERN CFTimeInterval CGEventSourceSecondsSinceLastEventType( CGEventSourceSt
 	{
 		if (timeSinceInitialCall >= maxTime)
 		{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 			[self performSelector:aSelector withObject:anArgument];
+#pragma clang diagnostic pop
 			return;
 		}
 	}
@@ -77,7 +80,10 @@ CG_EXTERN CFTimeInterval CGEventSourceSecondsSinceLastEventType( CGEventSourceSt
 	}
 	else
 	{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 		[self performSelector:aSelector withObject:anArgument];
+#pragma clang diagnostic pop
 	}
 }
 
