@@ -38,9 +38,8 @@
     NSViewAnimation     *animation;
 
     animation = [[NSViewAnimation alloc] initWithViewAnimations:
-        [NSArray arrayWithObject:[NSDictionary dictionaryWithObjectsAndKeys:
-            self, NSViewAnimationTargetKey,
-            [NSValue valueWithRect:frameRect], NSViewAnimationEndFrameKey, nil]]];
+        @[@{NSViewAnimationTargetKey: self,
+            NSViewAnimationEndFrameKey: [NSValue valueWithRect:frameRect]}]];
     
     [animation setDuration:duration];
     [animation setAnimationBlockingMode:NSAnimationBlocking];

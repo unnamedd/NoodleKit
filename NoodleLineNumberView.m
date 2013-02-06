@@ -166,18 +166,18 @@
         lineIndex = [self lineNumberForCharacterIndex:_invalidCharacterIndex inText:text];
         if (count > 0)
         {
-            charIndex = [[_lineIndices objectAtIndex:lineIndex] unsignedIntegerValue];
+            charIndex = [_lineIndices[lineIndex] unsignedIntegerValue];
         }
         
         do
         {
             if (lineIndex < count)
             {
-                [_lineIndices replaceObjectAtIndex:lineIndex withObject:[NSNumber numberWithUnsignedInteger:charIndex]];
+                _lineIndices[lineIndex] = @(charIndex);
             }
             else
             {
-                [_lineIndices addObject:[NSNumber numberWithUnsignedInteger:charIndex]];
+                [_lineIndices addObject:@(charIndex)];
             }
             
             charIndex = NSMaxRange([text lineRangeForRange:NSMakeRange(charIndex, 0)]);
@@ -195,7 +195,7 @@
         [text getLineStart:NULL end:&lineEnd contentsEnd:&contentEnd forRange:NSMakeRange([[_lineIndices lastObject] unsignedIntegerValue], 0)];
         if (contentEnd < lineEnd)
         {
-            [_lineIndices addObject:[NSNumber numberWithUnsignedInteger:charIndex]];
+            [_lineIndices addObject:@(charIndex)];
         }
 
         // See if we need to adjust the width of the view
@@ -240,7 +240,7 @@
     while ((right - left) > 1)
     {
         mid = (right + left) / 2;
-        lineStart = [[lines objectAtIndex:mid] unsignedIntegerValue];
+        lineStart = [lines[mid] unsignedIntegerValue];
         
         if (charIndex < lineStart)
         {
@@ -275,7 +275,7 @@
         color = [self defaultTextColor];
     }
     
-    return [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, color, NSForegroundColorAttributeName, nil];
+    return @{NSFontAttributeName: font, NSForegroundColorAttributeName: color};
 }
 
 - (NSDictionary *)markerTextAttributes
@@ -295,7 +295,7 @@
         color = [self defaultAlternateTextColor];
     }
     
-    return [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, color, NSForegroundColorAttributeName, nil];
+    return @{NSFontAttributeName: font, NSForegroundColorAttributeName: color};
 }
 
 - (CGFloat)requiredThickness
@@ -384,7 +384,7 @@
         
         for (line = [self lineNumberForCharacterIndex:range.location inText:text]; line < count; line++)
         {
-            index = [[lines objectAtIndex:line] unsignedIntegerValue];
+            index = [lines[line] unsignedIntegerValue];
             
             if (NSLocationInRange(index, range))
             {
@@ -399,7 +399,7 @@
                     // portion. Need to compensate for the clipview's coordinates.
                     ypos = yinset + NSMinY(rects[0]) - NSMinY(visibleRect);
 					
-					marker = [_linesToMarkers objectForKey:[NSNumber numberWithUnsignedInteger:line]];
+					marker = _linesToMarkers[@(line)];
 					
 					if (marker != nil)
 					{
@@ -472,7 +472,7 @@
 		
 		for (line = 0; line < count; line++)
 		{
-			index = [[lines objectAtIndex:line] unsignedIntegerValue];
+			index = [lines[line] unsignedIntegerValue];
 			
 			rects = [layoutManager rectArrayForCharacterRange:NSMakeRange(index, 0)
 								 withinSelectedCharacterRange:nullRange
@@ -493,7 +493,7 @@
 
 - (NoodleLineNumberMarker *)markerAtLine:(NSUInteger)line
 {
-	return [_linesToMarkers objectForKey:[NSNumber numberWithUnsignedInteger:line - 1]];
+	return _linesToMarkers[@(line - 1)];
 }
 
 - (void)setMarkers:(NSArray *)markers
@@ -515,8 +515,7 @@
 {
 	if ([aMarker isKindOfClass:[NoodleLineNumberMarker class]])
 	{
-		[_linesToMarkers setObject:aMarker
-							forKey:[NSNumber numberWithUnsignedInteger:[(NoodleLineNumberMarker *)aMarker lineNumber] - 1]];
+		_linesToMarkers[@([(NoodleLineNumberMarker *)aMarker lineNumber] - 1)] = aMarker;
 	}
 	else
 	{
@@ -528,7 +527,7 @@
 {
 	if ([aMarker isKindOfClass:[NoodleLineNumberMarker class]])
 	{
-		[_linesToMarkers removeObjectForKey:[NSNumber numberWithUnsignedInteger:[(NoodleLineNumberMarker *)aMarker lineNumber] - 1]];
+		[_linesToMarkers removeObjectForKey:@([(NoodleLineNumberMarker *)aMarker lineNumber] - 1)];
 	}
 	else
 	{

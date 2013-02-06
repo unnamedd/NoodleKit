@@ -151,11 +151,11 @@
 	
 	if ([encoder allowsKeyedCoding])
 	{
-		[encoder encodeObject:[NSNumber numberWithBool:_spanningEnabled] forKey:SPANNING_ENABLED_KEY];
+		[encoder encodeObject:@(_spanningEnabled) forKey:SPANNING_ENABLED_KEY];
 	}
 	else
 	{
-		[encoder encodeObject:[NSNumber numberWithBool:_spanningEnabled]];
+		[encoder encodeObject:@(_spanningEnabled)];
 	}
 }
 
@@ -209,11 +209,11 @@
 	
 	if ([encoder allowsKeyedCoding])
 	{
-		[encoder encodeObject:[NSNumber numberWithBool:_showsStickyRowHeader] forKey:SHOWS_STICKY_ROW_HEADER_KEY];
+		[encoder encodeObject:@(_showsStickyRowHeader) forKey:SHOWS_STICKY_ROW_HEADER_KEY];
 	}
 	else
 	{
-		[encoder encodeObject:[NSNumber numberWithBool:_showsStickyRowHeader]];
+		[encoder encodeObject:@(_showsStickyRowHeader)];
 	}
 }
 
@@ -431,7 +431,7 @@
 {
 	NSTableColumn				*column;
 	
-	column = [[self tableColumns] objectAtIndex:columnIndex];	
+	column = [self tableColumns][columnIndex];	
 
 	if (!_isDrawingStickyRow && [column isRowSpanningEnabled])
 	{
@@ -495,7 +495,7 @@
 		point = [self convertPointFromBase:point];
 		
 		columnIndex = [self columnAtPoint:point];
-		column = [[self tableColumns] objectAtIndex:columnIndex];
+		column = [self tableColumns][columnIndex];
 		if ([column isRowSpanningEnabled])
 		{
 			return;
