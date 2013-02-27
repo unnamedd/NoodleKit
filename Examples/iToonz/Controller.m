@@ -117,7 +117,7 @@
 			}
 			else if ([identifier isEqual:@"Song"])
 			{
-				return [NSString stringWithFormat:@"Song #%d", rowIndex - tally + 1];
+				return [NSString stringWithFormat:@"Song #%lu", rowIndex - tally + 1];
 			}
 		}
 		tally += songCount;
