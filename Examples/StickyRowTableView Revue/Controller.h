@@ -2,7 +2,7 @@
 //  Controller.h
 //
 //  Created by Paul Kim on 8/21/09.
-//  Copyright 2009-2012 Noodlesoft, LLC. All rights reserved.
+//  Copyright 2009 Noodlesoft, LLC. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -33,7 +33,7 @@
 @interface Controller : NSObject
 {
 	IBOutlet NoodleTableView	*_stickyRowTableView;
-	IBOutlet NSTableView        *_iPhoneTableView;
+	IBOutlet NSTableView		*_iPhoneTableView;
 	NSMutableArray				*_names;
 }
 
