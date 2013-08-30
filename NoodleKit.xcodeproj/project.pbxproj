@@ -1139,7 +1139,7 @@
 					"$(inherited)",
 					"-fsingle-precision-constant",
 				);
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -1162,7 +1162,7 @@
 					"$(inherited)",
 					"-fsingle-precision-constant",
 				);
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
