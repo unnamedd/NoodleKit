@@ -13,12 +13,12 @@
 
 @synthesize drawBlock = _drawBlock;
 
-+ (id)imageRepWithDrawBlock:(void (^)(NoodleCustomImageRep *))block
++ (instancetype)imageRepWithDrawBlock:(void (^)(NoodleCustomImageRep *))block
 {
     return [[[self class] alloc] initWithDrawBlock:block];
 }
 
-- (id)initWithDrawBlock:(void (^)(NoodleCustomImageRep *))block
+- (instancetype)initWithDrawBlock:(void (^)(NoodleCustomImageRep *))block
 {
     if ((self = [super init]) != nil)
     {

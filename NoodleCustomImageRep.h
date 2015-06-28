@@ -42,8 +42,8 @@
 
 @property (readwrite, copy) void    (^drawBlock)(NoodleCustomImageRep *rep);
 
-+ (id)imageRepWithDrawBlock:(void (^)(NoodleCustomImageRep *))block;
++ (instancetype)imageRepWithDrawBlock:(void (^)(NoodleCustomImageRep *))block;
 
-- (id)initWithDrawBlock:(void (^)(NoodleCustomImageRep *))block;
+- (instancetype)initWithDrawBlock:(void (^)(NoodleCustomImageRep *))block NS_DESIGNATED_INITIALIZER;
 
 @end

@@ -37,12 +37,12 @@
 
 @implementation NoodleIndexSetEnumerator
 
-+ enumeratorWithIndexSet:(NSIndexSet *)set
++ (instancetype)enumeratorWithIndexSet:(NSIndexSet *)set
 {
 	return [[[self class] alloc] initWithIndexSet:set];
 }
 
-- initWithIndexSet:(NSIndexSet *)set
+- (instancetype)initWithIndexSet:(NSIndexSet *)set
 {
 	if ((self = [super init]) != nil)
 	{

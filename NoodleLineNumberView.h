@@ -59,7 +59,7 @@
 @property (readwrite, strong) NSColor   *alternateTextColor;
 @property (readwrite, strong) NSColor   *backgroundColor;
 
-- (id)initWithScrollView:(NSScrollView *)aScrollView;
+- (instancetype)initWithScrollView:(NSScrollView *)aScrollView NS_DESIGNATED_INITIALIZER;
 
 - (NSUInteger)lineNumberForLocation:(CGFloat)location;
 - (NoodleLineNumberMarker *)markerAtLine:(NSUInteger)line;

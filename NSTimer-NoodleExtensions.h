@@ -51,11 +51,11 @@ typedef void	(^NoodleTimerBlock)(NSTimer *timer);
 
 + (NSTimer *)timerWithTimeInterval:(NSTimeInterval)seconds repeats:(BOOL)repeats block:(NoodleTimerBlock)block;
 
-- (id)initWithAbsoluteFireDate:(NSDate *)date target:(id)target selector:(SEL)aSelector userInfo:(id)userInfo;
+- (instancetype)initWithAbsoluteFireDate:(NSDate *)date target:(id)target selector:(SEL)aSelector userInfo:(id)userInfo;
 
-- (id)initWithAbsoluteFireDate:(NSDate *)date block:(NoodleTimerBlock)block;
+- (instancetype)initWithAbsoluteFireDate:(NSDate *)date block:(NoodleTimerBlock)block;
 
-- (id)initWithFireDate:(NSDate *)date interval:(NSTimeInterval)seconds repeats:(BOOL)repeats block:(NoodleTimerBlock)block;
+- (instancetype)initWithFireDate:(NSDate *)date interval:(NSTimeInterval)seconds repeats:(BOOL)repeats block:(NoodleTimerBlock)block;
 
 @end
 

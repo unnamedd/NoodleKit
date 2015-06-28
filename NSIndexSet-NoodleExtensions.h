@@ -36,14 +36,14 @@
 }
 
 // Returns NSNotFound when there are no more indexes.
-- (NSUInteger)nextIndex;
+@property (nonatomic, readonly) NSUInteger nextIndex;
 
 @end
 
 
 @interface NSIndexSet (NoodleExtensions)
 
-- (NoodleIndexSetEnumerator *)indexEnumerator;
+@property (nonatomic, readonly, strong) NoodleIndexSetEnumerator *indexEnumerator;
 
 @end
 

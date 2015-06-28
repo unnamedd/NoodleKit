@@ -87,7 +87,7 @@ static char observerKey;
 	return [self timerWithTimeInterval:seconds target:glue selector:@selector(invoke:) userInfo:nil repeats:repeats];
 }
 
-- (id)initWithAbsoluteFireDate:(NSDate *)date target:(id)target selector:(SEL)aSelector userInfo:(id)userInfo
+- (instancetype)initWithAbsoluteFireDate:(NSDate *)date target:(id)target selector:(SEL)aSelector userInfo:(id)userInfo
 {
 	self = [self initWithFireDate:date interval:0 target:target selector:aSelector userInfo:userInfo repeats:NO];
 
@@ -123,7 +123,7 @@ static char observerKey;
 	return self;
 }
 
-- (id)initWithAbsoluteFireDate:(NSDate *)date block:(NoodleTimerBlock)block
+- (instancetype)initWithAbsoluteFireDate:(NSDate *)date block:(NoodleTimerBlock)block
 {
     NoodleGlue      *glue;
     
@@ -135,7 +135,7 @@ static char observerKey;
 	return [self initWithAbsoluteFireDate:date target:glue selector:@selector(invoke:) userInfo:nil];
 }
 
-- (id)initWithFireDate:(NSDate *)date interval:(NSTimeInterval)seconds repeats:(BOOL)repeats block:(NoodleTimerBlock)block
+- (instancetype)initWithFireDate:(NSDate *)date interval:(NSTimeInterval)seconds repeats:(BOOL)repeats block:(NoodleTimerBlock)block
 {	
     NoodleGlue      *glue;
     

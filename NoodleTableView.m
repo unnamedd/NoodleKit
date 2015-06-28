@@ -159,7 +159,7 @@
 	}
 }
 
-- (id)initWithCoder:(NSCoder *)decoder
+- (instancetype)initWithCoder:(NSCoder *)decoder
 {
 	if ((self = [super initWithCoder:decoder]) != nil)
 	{
@@ -217,7 +217,7 @@
 	}
 }
 
-- (id)initWithCoder:(NSCoder *)decoder
+- (instancetype)initWithCoder:(NSCoder *)decoder
 {
 	if ((self = [super initWithCoder:decoder]) != nil)
 	{

@@ -28,13 +28,15 @@
 
 #import <Cocoa/Cocoa.h>
 
-typedef NSUInteger		NoodleStickyRowTransition;
-
-enum
+#ifndef NS_ENUM
+#import <Foundation/Foundation.h>
+#endif
+typedef NS_ENUM(NSUInteger, NoodleStickyRowTransition)
 {
 	NoodleStickyRowTransitionNone,
 	NoodleStickyRowTransitionFadeIn
 };
+
 
 void NoodleClearRect(NSRect rect);
 
@@ -68,7 +70,7 @@ void NoodleClearRect(NSRect rect);
  Returns the rect of the sticky view header. Will return NSZeroRect if there is no current
  sticky row.
  */
-- (NSRect)stickyRowHeaderRect;
+@property (nonatomic, readonly) NSRect stickyRowHeaderRect;
 
 /*
  Does an animated scroll to the current sticky row. Clicking on the sticky
@@ -80,7 +82,7 @@ void NoodleClearRect(NSRect rect);
  Returns what kind of transition you want when the row becomes sticky. Fade-in 
  is the default.
  */
-- (NoodleStickyRowTransition)stickyRowHeaderTransition;
+@property (nonatomic, readonly) NoodleStickyRowTransition stickyRowHeaderTransition;
 
 #pragma mark Row Spanning methods
 
@@ -100,12 +102,12 @@ void NoodleClearRect(NSRect rect);
 /*
  Returns whether this column will try to consolidate rows into spans.
  */
-- (BOOL)isRowSpanningEnabled;
+@property (nonatomic, getter=isRowSpanningEnabled, readonly) BOOL rowSpanningEnabled;
 
 /*
  Returns the cell used to draw the spanning regions. Default implementation returns nil.
  */
-- (NoodleRowSpanningCell *)spanningCell;
+@property (nonatomic, readonly, strong) NoodleRowSpanningCell *spanningCell;
 
 @end
 

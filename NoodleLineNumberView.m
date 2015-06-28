@@ -55,7 +55,7 @@
 @synthesize alternateTextColor = _alternateTextColor;
 @synthesize backgroundColor = _backgroundColor;
 
-- (id)initWithScrollView:(NSScrollView *)aScrollView
+- (instancetype)initWithScrollView:(NSScrollView *)aScrollView
 {
     if ((self = [super initWithScrollView:aScrollView orientation:NSVerticalRuler]) != nil)
     {
@@ -542,7 +542,7 @@
 #define NOODLE_ALT_TEXT_COLOR_CODING_KEY	@"alternateTextColor"
 #define NOODLE_BACKGROUND_COLOR_CODING_KEY	@"backgroundColor"
 
-- (id)initWithCoder:(NSCoder *)decoder
+- (instancetype)initWithCoder:(NSCoder *)decoder
 {
 	if ((self = [super initWithCoder:decoder]) != nil)
 	{

@@ -44,7 +44,7 @@
 	return [[NoodleGlue alloc] initWithBlock:glueBlock cleanupBlock:cleanupBlock];
 }
 
-- (id)initWithBlock:(NoodleGlueBlock)glueBlock cleanupBlock:(NoodleGlueCleanupBlock)cleanupBlock
+- (instancetype)initWithBlock:(NoodleGlueBlock)glueBlock cleanupBlock:(NoodleGlueCleanupBlock)cleanupBlock
 {
 	if ((self = [super init]) != nil)
 	{

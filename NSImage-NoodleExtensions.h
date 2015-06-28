@@ -70,7 +70,7 @@
  @abstract	Returns a version of the receiver but unflipped.
  @discussion This does not actually flip the image but returns an image with the same orientation but with an unflipped coordinate system internally (isFlipped returns NO). If the image is already unflipped, this method returns self.
  */
-- (NSImage *)unflippedImage;
+@property (nonatomic, readonly, copy) NSImage *unflippedImage;
 
 
 @end

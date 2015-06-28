@@ -31,7 +31,7 @@
 
 @implementation NoodleIPhoneTableView
 
-- (id)initWithFrame:(NSRect)frameRect
+- (instancetype)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil)
 	{
@@ -41,7 +41,7 @@
 	return self;
 }
 
-- (id)initWithCoder:(NSCoder *)decoder
+- (instancetype)initWithCoder:(NSCoder *)decoder
 {
 	if ((self = [super initWithCoder:decoder]) != nil)
 	{
