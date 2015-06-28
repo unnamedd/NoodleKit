@@ -37,7 +37,7 @@ void NoodleClearRect(NSRect rect)
 	NSRectFill(rect);
 }
 
-@interface NSTableView (NoodlePrivate)
+@interface NSTableView ()
 
 #pragma mark Sticky Row Header methods
 
@@ -54,6 +54,8 @@ void NoodleClearRect(NSRect rect)
 
 @end
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
 
 @implementation NSTableView (NoodleExtensions)
 
@@ -462,3 +464,4 @@ void NoodleClearRect(NSRect rect)
 
 @end
 
+#pragma clang diagnostic pop
