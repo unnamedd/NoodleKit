@@ -12,8 +12,8 @@
 		322DEBB31072595B00CB7080 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 322DEBB11072595B00CB7080 /* Controller.m */; };
 		322DEBB41072595B00CB7080 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 322DEBB21072595B00CB7080 /* main.m */; };
 		322DEBB81072598E00CB7080 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 322DEBB61072598E00CB7080 /* MainMenu.xib */; };
-		322DECB310727B3C00CB7080 /* NoodleKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; };
-		322DECC610727B9300CB7080 /* NoodleKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; };
+		322DECB310727B3C00CB7080 /* NoodleKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		322DECC610727B9300CB7080 /* NoodleKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		3251D221108F7FAE007E281D /* NSIndexSet-NoodleExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3251D21F108F7FAE007E281D /* NSIndexSet-NoodleExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3251D222108F7FAE007E281D /* NSIndexSet-NoodleExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3251D220108F7FAE007E281D /* NSIndexSet-NoodleExtensions.m */; };
 		3251D225108F7FB9007E281D /* NoodleTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3251D223108F7FB9007E281D /* NoodleTableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -44,7 +44,7 @@
 		32783099107152E30041F09C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32783098107152E30041F09C /* main.m */; };
 		327830AB107153500041F09C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 		327830F3107155D70041F09C /* NoodleKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; };
-		3278311A107156CB0041F09C /* NoodleKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; };
+		3278311A107156CB0041F09C /* NoodleKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		32783133107159280041F09C /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 32783132107159280041F09C /* Credits.rtf */; };
 		3278315510715AC90041F09C /* NoodleKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; };
 		3278315910715AEA0041F09C /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 3278315810715AEA0041F09C /* Controller.m */; };
@@ -52,7 +52,7 @@
 		3278315E10715AFC0041F09C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3278315D10715AFC0041F09C /* main.m */; };
 		3278316210715B210041F09C /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3278316110715B210041F09C /* Credits.rtf */; };
 		3278316410715B440041F09C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
-		3278316810715B680041F09C /* NoodleKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; };
+		3278316810715B680041F09C /* NoodleKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		327831AE107160460041F09C /* NoodleKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; };
 		327831B0107160510041F09C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 		327831B7107160690041F09C /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 327831B4107160690041F09C /* Controller.m */; };
@@ -67,15 +67,15 @@
 		327CD77B11DCF77000A88EA5 /* TimerLabAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 327CD77A11DCF77000A88EA5 /* TimerLabAppDelegate.m */; };
 		327CD78211DCF7D400A88EA5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 327CD78111DCF7D400A88EA5 /* main.m */; };
 		327CD78711DCF82100A88EA5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 327CD78511DCF82100A88EA5 /* MainMenu.xib */; };
-		327CD7C711DCFA2F00A88EA5 /* NoodleKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; };
+		327CD7C711DCFA2F00A88EA5 /* NoodleKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		327CD7D711DD17F500A88EA5 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 327CD7D611DD17F500A88EA5 /* Credits.rtf */; };
 		327CD86011DD224E00A88EA5 /* NoodleKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; };
-		327CD86A11DD237000A88EA5 /* NoodleKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; };
+		327CD86A11DD237000A88EA5 /* NoodleKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 		B40F77FC135527AE00FCC42A /* NoodleCustomImageRep.h in Headers */ = {isa = PBXBuildFile; fileRef = B40F77FA135527AE00FCC42A /* NoodleCustomImageRep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B40F77FD135527AE00FCC42A /* NoodleCustomImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = B40F77FB135527AE00FCC42A /* NoodleCustomImageRep.m */; };
-		B40F780F13552B0B00FCC42A /* NoodleKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; };
+		B40F780F13552B0B00FCC42A /* NoodleKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B40F782A13552B7100FCC42A /* NoodleKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* NoodleKit.framework */; };
 		B40F784C13562C4D00FCC42A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B40F784A13562C4D00FCC42A /* MainMenu.xib */; };
 		B40F785113562CA500FCC42A /* test.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B40F785013562CA500FCC42A /* test.tiff */; };
@@ -781,7 +781,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0630;
 			};
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "NoodleKit" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1085,7 +1085,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1108,7 +1107,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1128,7 +1126,6 @@
 		1DEB91B208733DA50010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1152,7 +1149,6 @@
 		1DEB91B308733DA50010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
