@@ -44,6 +44,6 @@
 
 + (instancetype)imageRepWithDrawBlock:(void (^)(NoodleCustomImageRep *))block;
 
-- (instancetype)initWithDrawBlock:(void (^)(NoodleCustomImageRep *))block NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDrawBlock:(void (^)(NoodleCustomImageRep *))block /*NS_DESIGNATED_INITIALIZER*/;
 
 @end

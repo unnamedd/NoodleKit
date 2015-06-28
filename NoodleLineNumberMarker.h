@@ -40,7 +40,7 @@
 	NSUInteger		_lineNumber;
 }
 
-- (instancetype)initWithRulerView:(NSRulerView *)aRulerView lineNumber:(CGFloat)line image:(NSImage *)anImage imageOrigin:(NSPoint)imageOrigin NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithRulerView:(NSRulerView *)aRulerView lineNumber:(CGFloat)line image:(NSImage *)anImage imageOrigin:(NSPoint)imageOrigin /*NS_DESIGNATED_INITIALIZER*/;
 
 @property (nonatomic) NSUInteger lineNumber;
 
