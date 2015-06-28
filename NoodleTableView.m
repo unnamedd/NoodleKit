@@ -492,7 +492,7 @@
 		NSTableColumn		*column;
 		
 		point = [event locationInWindow];
-		point = [self convertPointFromBase:point];
+		point = [self convertPoint:point fromView:nil];
 		
 		columnIndex = [self columnAtPoint:point];
 		column = [self tableColumns][columnIndex];

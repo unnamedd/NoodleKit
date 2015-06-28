@@ -82,7 +82,6 @@
     // Grab the window's pixels
     NSCopyBits([self gState], NSMakeRect(0.0, 0.0, frame.size.width, frame.size.height), NSZeroPoint);
     [image unlockFocus];
-	[image setDataRetained:YES];
 	[image setCacheMode:NSImageCacheNever];
     
     zoomWindow = [[NSWindow alloc] initWithContentRect:rect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
