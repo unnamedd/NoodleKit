@@ -46,7 +46,9 @@
 
 - (instancetype)initWithBlock:(NoodleGlueBlock)glueBlock cleanupBlock:(NoodleGlueCleanupBlock)cleanupBlock
 {
-	if ((self = [super init]) != nil)
+	self = [super init];
+	
+	if (self)
 	{
 		_glueBlock = [glueBlock copy];
 		_cleanupBlock = [cleanupBlock copy];
