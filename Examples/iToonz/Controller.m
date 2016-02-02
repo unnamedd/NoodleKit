@@ -68,7 +68,7 @@
 					 },
 				 @{
 					 ARTIST_KEY: @"M.C. Mac",
-					 ARTWORK_KEY: [NSImage imageNamed:NSImageNameDotMac],
+					 ARTWORK_KEY: [NSImage imageNamed:NSImageNameMobileMe],
 					 ALBUM_KEY: @"Dot Mackin'",
 					 SONGCOUNT_KEY: @7,
 					 },
