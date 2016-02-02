@@ -45,41 +45,47 @@
 
 - (void)awakeFromNib
 {
-	[_tableView setIntercellSpacing:NSMakeSize(0.0, 0.0)];
+	_tableView.intercellSpacing = NSMakeSize(0.0, 0.0);
 	[_tableView setShowsStickyRowHeader:YES];
 	[_tableView setRowSpanningEnabledForCapableColumns:YES];
-	_number = [NSNumber numberWithInt:5];
+	_number = @5;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	_entries = [[NSArray alloc] initWithObjects:
-				[NSDictionary dictionaryWithObjectsAndKeys:
-				 @"Mr Disco", ARTIST_KEY,
-				 [NSImage imageNamed:NSImageNameFolderBurnable], ARTWORK_KEY,
-				 @"Burn Baby Burn", ALBUM_KEY,
-				 [NSNumber numberWithInteger:9], SONGCOUNT_KEY, nil],
-				[NSDictionary dictionaryWithObjectsAndKeys:
-				 @"Pierre LeMac", ARTIST_KEY,
-				 [NSImage imageNamed:NSImageNameBonjour], ARTWORK_KEY,
-				 @"Bonjour Ma Cherie", ALBUM_KEY,
-				 [NSNumber numberWithInteger:13], SONGCOUNT_KEY, nil],
-				[NSDictionary dictionaryWithObjectsAndKeys:
-				 @"M.C. Mac", ARTIST_KEY,
-				 [NSImage imageNamed:NSImageNameDotMac], ARTWORK_KEY,
-				 @"Dot Mackin'", ALBUM_KEY,
-				 [NSNumber numberWithInteger:7], SONGCOUNT_KEY, nil],
-				[NSDictionary dictionaryWithObjectsAndKeys:
- 				 @"M.C. Mac", ARTIST_KEY,
-				 [NSImage imageNamed:NSImageNameFolderSmart], ARTWORK_KEY,
-				 @"You Think You're So Smart", ALBUM_KEY,
-				 [NSNumber numberWithInteger:14], SONGCOUNT_KEY, nil],
-				[NSDictionary dictionaryWithObjectsAndKeys:
-				 @"ComputerHead", ARTIST_KEY,
-				 [NSImage imageNamed:NSImageNameComputer], ARTWORK_KEY,
-				 @"Cancel Computer", ALBUM_KEY,
-				 [NSNumber numberWithInteger:12], SONGCOUNT_KEY, nil],
-				nil];
+	_entries = @[
+				 @{
+					 ARTIST_KEY: @"Mr Disco",
+					 ARTWORK_KEY: [NSImage imageNamed:NSImageNameFolderBurnable],
+					 ALBUM_KEY: @"Burn Baby Burn",
+					 SONGCOUNT_KEY: @9,
+					 },
+				 @{
+					 ARTIST_KEY: @"Pierre LeMac",
+					 ARTWORK_KEY: [NSImage imageNamed:NSImageNameBonjour],
+					 ALBUM_KEY: @"Bonjour Ma Cherie",
+					 SONGCOUNT_KEY: @13,
+					 },
+				 @{
+					 ARTIST_KEY: @"M.C. Mac",
+					 ARTWORK_KEY: [NSImage imageNamed:NSImageNameDotMac],
+					 ALBUM_KEY: @"Dot Mackin'",
+					 SONGCOUNT_KEY: @7,
+					 },
+				 @{
+					 ARTIST_KEY: @"M.C. Mac",
+					 ARTWORK_KEY: [NSImage imageNamed:NSImageNameFolderSmart],
+					 ALBUM_KEY: @"You Think You're So Smart",
+					 SONGCOUNT_KEY: @14,
+					 },
+				 
+				 @{
+					 ARTIST_KEY: @"ComputerHead",
+					 ARTWORK_KEY: [NSImage imageNamed:NSImageNameComputer],
+					 ALBUM_KEY: @"Cancel Computer",
+					 SONGCOUNT_KEY: @12,
+					 },
+				 ];
 	
 	[(NoodleTableColumn *)[_tableView tableColumnWithIdentifier:@"Album"] setRowSpanningEnabled:NO];
 	[_tableView reloadData];
@@ -96,24 +102,24 @@
 	id				identifier;
 	
 	tally = 0;
-	identifier = [aTableColumn identifier];
+	identifier = aTableColumn.identifier;
 	for (NSDictionary *dict in _entries)
 	{
-		songCount = [[dict objectForKey:SONGCOUNT_KEY] integerValue];
+		songCount = [dict[SONGCOUNT_KEY] integerValue];
 		
 		if (rowIndex < tally + songCount)
 		{
 			if ([identifier isEqual:@"Artwork"])
 			{
-				return [dict objectForKey:ARTWORK_KEY];
+				return dict[ARTWORK_KEY];
 			}
 			else if ([identifier isEqual:@"Album"])
 			{
-				return [dict objectForKey:ALBUM_KEY];
+				return dict[ALBUM_KEY];
 			}
 			else if ([identifier isEqual:@"Artist"])
 			{
-				return [dict objectForKey:ARTIST_KEY];
+				return dict[ARTIST_KEY];
 			}
 			else if ([identifier isEqual:@"Song"])
 			{
@@ -127,9 +133,9 @@
 
 - (void)tableView:(NSTableView *)tableView didClickTableColumn:(NSTableColumn *)tableColumn
 {
-	if ([[tableColumn identifier] isEqual:@"Album"])
+	if ([tableColumn.identifier isEqual:@"Album"])
 	{
-		[(NoodleTableColumn *)tableColumn setRowSpanningEnabled:![(NoodleTableColumn *)tableColumn isRowSpanningEnabled]];
+		((NoodleTableColumn *)tableColumn).rowSpanningEnabled = !((NoodleTableColumn *)tableColumn).rowSpanningEnabled;
 		[_tableView reloadData];
 	}
 }
@@ -156,7 +162,7 @@
 
 - (BOOL)tableView:(NSTableView *)tableView shouldDisplayCellInStickyRowHeaderForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)rowIndex
 {
-	return [[tableColumn identifier] isEqual:@"Artist"];
+	return [tableColumn.identifier isEqual:@"Artist"];
 }
 
 @end

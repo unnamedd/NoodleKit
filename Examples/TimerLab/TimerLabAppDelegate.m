@@ -35,14 +35,14 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	[_picker setObjectValue:[NSDate date]];
+	_picker.objectValue = [NSDate date];
 	[self syncPickers:_picker];
 	
 	// We use -delayedRefresh: here instead of refresh: because NSTimer will be watching for these same notifications
 	// and we can't guarantee the order in which the observers are notified (we want the refresh to happen after
 	// the timer adjusts).
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delayedRefresh:) name:NSSystemTimeZoneDidChangeNotification object:nil];
-	[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(delayedRefresh:) name:NSWorkspaceDidWakeNotification object:nil];
+	[[NSWorkspace sharedWorkspace].notificationCenter addObserver:self selector:@selector(delayedRefresh:) name:NSWorkspaceDidWakeNotification object:nil];
 }
 
 
@@ -51,24 +51,24 @@
 	NSDate		*date;
 	
 	date = [NSDate date];
-	[_initialDateField setObjectValue:date];
-	[_regularInitialDateField setObjectValue:date];
+	_initialDateField.objectValue = date;
+	_regularInitialDateField.objectValue = date;
 	
-	date = [_picker objectValue];
+	date = _picker.objectValue;
 	
-	[_initialFireDateField setObjectValue:date];
-	[_regularInitialFireDateField setObjectValue:date];
+	_initialFireDateField.objectValue = date;
+	_regularInitialFireDateField.objectValue = date;
 	
 	[_absoluteTimer invalidate];
 	[_absoluteTimer release];
 	_absoluteTimer = [[NSTimer alloc] initWithAbsoluteFireDate:date block:
 			  ^ (NSTimer *timer)
 			  {
-				  [_fireDateField setObjectValue:[NSDate date]];
+				  _fireDateField.objectValue = [NSDate date];
 			  }];
 	
 	[_fireDateField setObjectValue:nil];
-	[_currentFireDateField setObjectValue:[_absoluteTimer fireDate]];
+	_currentFireDateField.objectValue = _absoluteTimer.fireDate;
 	
 	[[NSRunLoop currentRunLoop] addTimer:_absoluteTimer forMode:NSDefaultRunLoopMode];
 
@@ -77,11 +77,11 @@
 	_regularTimer = [[NSTimer alloc] initWithFireDate:date interval:0 repeats:NO block:
 					 ^ (NSTimer *timer)
 					 {
-						 [_regularFireDateField setObjectValue:[NSDate date]];
+						 _regularFireDateField.objectValue = [NSDate date];
 					 }];
 
 	[_regularFireDateField setObjectValue:nil];	
-	[_regularCurrentFireDateField setObjectValue:[_regularTimer fireDate]];
+	_regularCurrentFireDateField.objectValue = _regularTimer.fireDate;
 
 	[[NSRunLoop currentRunLoop] addTimer:_regularTimer forMode:NSDefaultRunLoopMode];
 }
@@ -91,15 +91,15 @@
 	NSDate		*date;
 	
 	date = [sender objectValue];
-	[_picker setObjectValue:date];
-	[_datePicker setObjectValue:date];
-	[_timePicker setObjectValue:date];
+	_picker.objectValue = date;
+	_datePicker.objectValue = date;
+	_timePicker.objectValue = date;
 }
 
 - (IBAction)refresh:(id)sender
 {
-	[_currentFireDateField setObjectValue:[_absoluteTimer fireDate]];
-	[_regularCurrentFireDateField setObjectValue:[_regularTimer fireDate]];
+	_currentFireDateField.objectValue = _absoluteTimer.fireDate;
+	_regularCurrentFireDateField.objectValue = _regularTimer.fireDate;
 }
 
 - (IBAction)delayedRefresh:(id)sender

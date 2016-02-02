@@ -46,20 +46,20 @@
 	words = [words sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
 	_names = [[NSMutableArray alloc] init];
 	
-	count = [words count];
+	count = words.count;
 	currentPrefix = nil;
 	for (i = 0; i < count; i++)
 	{
-		temp = [words objectAtIndex:i];
+		temp = words[i];
 		
-		if ([temp length] > 0)
+		if (temp.length > 0)
 		{
 			prefix = [temp substringToIndex:1];
 			
 			if ((currentPrefix == nil) || 
 				([currentPrefix caseInsensitiveCompare:prefix] != NSOrderedSame))
 			{
-				currentPrefix = [prefix uppercaseString];
+				currentPrefix = prefix.uppercaseString;
 				[_names addObject:currentPrefix];
 			}
 			[_names addObject:temp];
@@ -74,19 +74,19 @@
 - (BOOL)_isHeader:(NSInteger)rowIndex
 {
 	return ((rowIndex == 0) ||
-			[[[_names objectAtIndex:rowIndex] substringToIndex:1] caseInsensitiveCompare:[[_names objectAtIndex:rowIndex - 1] substringToIndex:1]] != NSOrderedSame);
+			[[_names[rowIndex] substringToIndex:1] caseInsensitiveCompare:[_names[rowIndex - 1] substringToIndex:1]] != NSOrderedSame);
 }
 
 #pragma mark NSTableDataSource methods
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	return [_names count];
+	return _names.count;
 }
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
-	return [_names objectAtIndex:rowIndex];
+	return _names[rowIndex];
 }
 
 - (BOOL)tableView:(NSTableView *)tableView isGroupRow:(NSInteger)row

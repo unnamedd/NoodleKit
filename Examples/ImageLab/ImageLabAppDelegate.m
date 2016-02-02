@@ -42,7 +42,7 @@
 	
 	image = [[testImage copy] autorelease];
 	
-	size = [image size];
+	size = image.size;
 	diameter = size.width / 2.0;
 	
 	[image lockFocus];
@@ -61,7 +61,7 @@
 	NSSize					size;
 	NSImage					*image;
 
-	size = [testImage size];
+	size = testImage.size;
 
 	rep = [NoodleCustomImageRep imageRepWithDrawBlock:
 		   ^(NoodleCustomImageRep *blockRep)
@@ -69,7 +69,7 @@
 			   NSSize	repSize;
 			   CGFloat	diameter;
 			   
-			   repSize = [blockRep size];
+			   repSize = blockRep.size;
 			   diameter = repSize.width / 2.0;
 			   
 			   [testImage drawInRect:NSMakeRect(0.0, 0.0, size.width, size.height) fromRect:NSZeroRect operation:NSCompositeCopy fraction:1.0];
@@ -77,9 +77,9 @@
 			   [[NSColor blackColor] set];
 			   [[NSBezierPath bezierPathWithOvalInRect:NSMakeRect(diameter / 2.0, diameter / 2.0, diameter, diameter)] fill];
 			   
-			   [recacheIndicator setImage:[[[NSImage imageNamed:NSImageNameStatusAvailable] copy] autorelease]];
+			   recacheIndicator.image = [[[NSImage imageNamed:NSImageNameStatusAvailable] copy] autorelease];
 		   }];
-	[rep setSize:size];
+	rep.size = size;
 	image = [[[NSImage alloc] initWithSize:size] autorelease];
 	[image addRepresentation:rep];
 	
@@ -120,9 +120,9 @@
 			   [[NSColor blueColor] set];
 			   NSRectFill(NSMakeRect(1.0, 1.0, 8.0, 8.0));
 			   
-			   [recacheIndicator setImage:[[[NSImage imageNamed:NSImageNameStatusAvailable] copy] autorelease]];
+			   recacheIndicator.image = [[[NSImage imageNamed:NSImageNameStatusAvailable] copy] autorelease];
 		   }];
-	[rep setSize:size];
+	rep.size = size;
 	image = [[[NSImage alloc] initWithSize:size] autorelease];
 	[image addRepresentation:rep];
 	
@@ -139,24 +139,24 @@
 	CGRect				extent;
 	CGAffineTransform	transform;
 	
-	size = [testImage size];
+	size = testImage.size;
 
-	input = [CIImage imageWithData:[testImage TIFFRepresentation]];
+	input = [CIImage imageWithData:testImage.TIFFRepresentation];
 	filter = [CIFilter filterWithName:@"CIPointillize" keysAndValues:
 			  @"inputImage", input,
-			  @"inputRadius", [NSNumber numberWithFloat:(float)(size.width / 10.0)],
+			  @"inputRadius", @((float)(size.width / 10.0)),
               @"inputCenter", [CIVector vectorWithX:size.width / 2.0 Y:size.height / 2.0],
               nil];
 	output = [filter valueForKey:@"outputImage"];
 	
-	extent = [output extent];
+	extent = output.extent;
 	transform = CGAffineTransformMakeScale(size.width / extent.size.width, size.height / extent.size.height);
 	transform = CGAffineTransformTranslate(transform, -extent.origin.x, -extent.origin.y);
 	output = [output imageByApplyingTransform:transform];
 
 	image = [[[NSImage alloc] initWithSize:size] autorelease];
 	rep = [NSCIImageRep imageRepWithCIImage:output];
-	[rep setSize:size];
+	rep.size = size;
 	[image addRepresentation:rep];
 	
 	return image;
@@ -171,7 +171,7 @@
 	
 	label = timeLabel;
 	
-	size = [testImage size];
+	size = testImage.size;
 	
 	rep = [NoodleCustomImageRep imageRepWithDrawBlock:
 		   ^(NoodleCustomImageRep *blockRep)
@@ -182,7 +182,7 @@
 			   NSRect			rect;
 
 			   rect.origin = NSMakePoint(0.0, 0.0);
-			   rect.size = [blockRep size];
+			   rect.size = blockRep.size;
 			   
 			   cgImage = [testImage CGImageForProposedRect:&rect
 													 context:[NSGraphicsContext currentContext]
@@ -190,17 +190,17 @@
 			   input = [CIImage imageWithCGImage:cgImage];
                filter = [CIFilter filterWithName:@"CIPointillize" keysAndValues:
                          @"inputImage", input,
-                         @"inputRadius", [NSNumber numberWithFloat:(float)(NSWidth(rect) / 10.0)],
+                         @"inputRadius", @((float)(NSWidth(rect) / 10.0)),
                          @"inputCenter", [CIVector vectorWithX:NSWidth(rect) / 2.0 Y:NSHeight(rect) / 2.0],
                          nil];
 			   output = [filter valueForKey:@"outputImage"];
 			   
-			   [output drawInRect:rect fromRect:NSRectFromCGRect([output extent]) operation:NSCompositeCopy fraction:1.0]; 
+			   [output drawInRect:rect fromRect:NSRectFromCGRect(output.extent) operation:NSCompositeCopy fraction:1.0]; 
 			   
-			   [recacheIndicator setImage:[[[NSImage imageNamed:NSImageNameStatusAvailable] copy] autorelease]];
+			   recacheIndicator.image = [[[NSImage imageNamed:NSImageNameStatusAvailable] copy] autorelease];
 		   }];
 	
-	[rep setSize:size];
+	rep.size = size;
 	image = [[[NSImage alloc] initWithSize:size] autorelease];
 	[image addRepresentation:rep];
 	
@@ -211,7 +211,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 	testImage = [[NSImage imageNamed:@"test"] copy];
-	[recacheIndicator setImage:[[[NSImage imageNamed:NSImageNameStatusNone] copy] autorelease]];
+	recacheIndicator.image = [[[NSImage imageNamed:NSImageNameStatusNone] copy] autorelease];
 }
 
 - (IBAction)switchImage:(id)sender
@@ -246,7 +246,7 @@
 			image = [self coreImageCustomImageRep];
 			break;
 	}
-	[imageView setObjectValue:image];
+	imageView.objectValue = image;
 }
 
 - (IBAction)redraw:sender
