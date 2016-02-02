@@ -40,7 +40,7 @@
 	NSSize		size;
 	CGFloat		diameter;
 	
-	image = [[testImage copy] autorelease];
+	image = [testImage copy];
 	
 	size = image.size;
 	diameter = size.width / 2.0;
@@ -77,10 +77,10 @@
 			   [[NSColor blackColor] set];
 			   [[NSBezierPath bezierPathWithOvalInRect:NSMakeRect(diameter / 2.0, diameter / 2.0, diameter, diameter)] fill];
 			   
-			   recacheIndicator.image = [[[NSImage imageNamed:NSImageNameStatusAvailable] copy] autorelease];
+			   recacheIndicator.image = [[NSImage imageNamed:NSImageNameStatusAvailable] copy];
 		   }];
 	rep.size = size;
-	image = [[[NSImage alloc] initWithSize:size] autorelease];
+	image = [[NSImage alloc] initWithSize:size];
 	[image addRepresentation:rep];
 	
 	return image;
@@ -93,7 +93,7 @@
 	
 	size = NSMakeSize(10.0, 10.0);
 	
-	image = [[[NSImage alloc] initWithSize:size] autorelease];
+	image = [[NSImage alloc] initWithSize:size];
 	
 	[image lockFocus];
 	
@@ -120,10 +120,10 @@
 			   [[NSColor blueColor] set];
 			   NSRectFill(NSMakeRect(1.0, 1.0, 8.0, 8.0));
 			   
-			   recacheIndicator.image = [[[NSImage imageNamed:NSImageNameStatusAvailable] copy] autorelease];
+			   recacheIndicator.image = [[NSImage imageNamed:NSImageNameStatusAvailable] copy];
 		   }];
 	rep.size = size;
-	image = [[[NSImage alloc] initWithSize:size] autorelease];
+	image = [[NSImage alloc] initWithSize:size];
 	[image addRepresentation:rep];
 	
 	return image;
@@ -154,7 +154,7 @@
 	transform = CGAffineTransformTranslate(transform, -extent.origin.x, -extent.origin.y);
 	output = [output imageByApplyingTransform:transform];
 
-	image = [[[NSImage alloc] initWithSize:size] autorelease];
+	image = [[NSImage alloc] initWithSize:size];
 	rep = [NSCIImageRep imageRepWithCIImage:output];
 	rep.size = size;
 	[image addRepresentation:rep];
@@ -197,11 +197,11 @@
 			   
 			   [output drawInRect:rect fromRect:NSRectFromCGRect(output.extent) operation:NSCompositeCopy fraction:1.0]; 
 			   
-			   recacheIndicator.image = [[[NSImage imageNamed:NSImageNameStatusAvailable] copy] autorelease];
+			   recacheIndicator.image = [[NSImage imageNamed:NSImageNameStatusAvailable] copy];
 		   }];
 	
 	rep.size = size;
-	image = [[[NSImage alloc] initWithSize:size] autorelease];
+	image = [[NSImage alloc] initWithSize:size];
 	[image addRepresentation:rep];
 	
 	return image;	
@@ -211,7 +211,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 	testImage = [[NSImage imageNamed:@"test"] copy];
-	recacheIndicator.image = [[[NSImage imageNamed:NSImageNameStatusNone] copy] autorelease];
+	recacheIndicator.image = [[NSImage imageNamed:NSImageNameStatusNone] copy];
 }
 
 - (IBAction)switchImage:(id)sender

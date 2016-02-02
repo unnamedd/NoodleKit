@@ -30,7 +30,6 @@
 
 @interface TimerLabAppDelegate : NSObject <NSApplicationDelegate>
 {
-    IBOutlet NSWindow		*_window;
 	IBOutlet NSDatePicker	*_picker;
 	IBOutlet NSDatePicker	*_datePicker;
 	IBOutlet NSDatePicker	*_timePicker;
@@ -49,7 +48,7 @@
 	NSTimer					*_regularTimer;
 }
 
-@property (assign) IBOutlet NSWindow *window;
+@property (weak) IBOutlet NSWindow *window;
 
 - (IBAction)startTimer:(id)sender;
 

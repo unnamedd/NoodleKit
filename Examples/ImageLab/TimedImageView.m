@@ -40,7 +40,7 @@
 {
 	NSTimeInterval		time, diff;
 
-	[redrawIndicator setImage:[[[NSImage imageNamed:NSImageNameStatusNone] copy] autorelease]];
+	[redrawIndicator setImage:[[NSImage imageNamed:NSImageNameStatusNone] copy]];
 
 	time = [NSDate timeIntervalSinceReferenceDate];
 	

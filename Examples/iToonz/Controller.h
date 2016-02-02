@@ -32,11 +32,11 @@
 
 @interface Controller : NSObject
 {
-	IBOutlet NoodleTableView	*_tableView;
+	IBOutlet NoodleTableView	*__weak _tableView;
 	NSArray						*_entries;
 	id							_number;
 }
 
-@property (readonly) NSArray	*entries;
+@property (nonatomic, readonly, strong) NSArray	*entries;
 
 @end

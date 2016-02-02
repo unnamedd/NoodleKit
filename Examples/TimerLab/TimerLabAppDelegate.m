@@ -60,7 +60,6 @@
 	_regularInitialFireDateField.objectValue = date;
 	
 	[_absoluteTimer invalidate];
-	[_absoluteTimer release];
 	_absoluteTimer = [[NSTimer alloc] initWithAbsoluteFireDate:date block:
 			  ^ (NSTimer *timer)
 			  {
@@ -73,7 +72,6 @@
 	[[NSRunLoop currentRunLoop] addTimer:_absoluteTimer forMode:NSDefaultRunLoopMode];
 
 	[_regularTimer invalidate];
-	[_regularTimer release];
 	_regularTimer = [[NSTimer alloc] initWithFireDate:date interval:0 repeats:NO block:
 					 ^ (NSTimer *timer)
 					 {

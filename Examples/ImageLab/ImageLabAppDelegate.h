@@ -34,10 +34,10 @@
 	IBOutlet NSTextField		*timeLabel;
 	IBOutlet NSButton			*recacheIndicator;
 	NSImage						*testImage;
-    NSWindow					*window;
+    NSWindow					*__weak window;
 }
 
-@property (assign) IBOutlet NSWindow *window;
+@property (weak) IBOutlet NSWindow *window;
 
 - (IBAction)switchImage:sender;
 - (IBAction)redraw:sender;
