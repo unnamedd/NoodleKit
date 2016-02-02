@@ -125,7 +125,7 @@ static char cleanupGlueKey;
 		[glue setCleanupBlock:nil];
 		[glueTable removeObjectForKey:identifier];
 		
-		if ([glueTable count] == 0)
+		if (glueTable.count == 0)
 		{
 			objc_setAssociatedObject(self, &cleanupGlueKey, nil, OBJC_ASSOCIATION_RETAIN);
 		}

@@ -35,8 +35,8 @@
 {
 	if ((self = [super initWithFrame:frameRect]) != nil)
 	{
-		[self setGridColor:[NSColor colorWithCalibratedWhite:0.849 alpha:1.0]];
-		[self setGridStyleMask:NSTableViewSolidHorizontalGridLineMask];
+		self.gridColor = [NSColor colorWithCalibratedWhite:0.849 alpha:1.0];
+		self.gridStyleMask = NSTableViewSolidHorizontalGridLineMask;
 	}
 	return self;
 }
@@ -45,8 +45,8 @@
 {
 	if ((self = [super initWithCoder:decoder]) != nil)
 	{
-		[self setGridColor:[NSColor colorWithCalibratedWhite:0.849 alpha:1.0]];
-		[self setGridStyleMask:NSTableViewSolidHorizontalGridLineMask];
+		self.gridColor = [NSColor colorWithCalibratedWhite:0.849 alpha:1.0];
+		self.gridStyleMask = NSTableViewSolidHorizontalGridLineMask;
 	}
 	return self;
 }
@@ -86,7 +86,7 @@
 			// for group row so we re-draw the background over it.
 			[self drawBackgroundInClipRect:rowRect];
 			
-			if (NSIntersectsRect(rowRect, [self stickyRowHeaderRect]))
+			if (NSIntersectsRect(rowRect, self.stickyRowHeaderRect))
 			{
 				// You can barely notice it but if the sticky view is showing, the actual
 				// row it represents is still seen underneath. We check for this and don't
@@ -102,24 +102,24 @@
 		[gradient drawInRect:rowRect angle:90];
 
 		textShadow = [[NSShadow alloc] init];
-		[textShadow setShadowOffset:NSMakeSize(1.0, -1.0)];
-		[textShadow setShadowColor:[NSColor colorWithCalibratedWhite:0.5 alpha:1.0]];
-		[textShadow setShadowBlurRadius:0.0];
+		textShadow.shadowOffset = NSMakeSize(1.0, -1.0);
+		textShadow.shadowColor = [NSColor colorWithCalibratedWhite:0.5 alpha:1.0];
+		textShadow.shadowBlurRadius = 0.0;
 		
 		attributes = @{NSFontAttributeName: [NSFont fontWithName:@"Helvetica-Bold" size:14.0],
 													 NSShadowAttributeName: textShadow,
 													 NSForegroundColorAttributeName: [NSColor whiteColor]};
 		
-		count = [self numberOfColumns];
+		count = self.numberOfColumns;
 		for (colIndex = 0; colIndex < count; colIndex++)
 		{
 			cell = [self preparedCellAtColumn:colIndex row:rowIndex];
 
-			attrString = [[NSAttributedString alloc] initWithString:[cell stringValue] attributes:attributes];
+			attrString = [[NSAttributedString alloc] initWithString:cell.stringValue attributes:attributes];
 			
 			cellRect = [self frameOfCellAtColumn:colIndex row:rowIndex];
 			
-			[cell setAttributedStringValue:attrString];
+			cell.attributedStringValue = attrString;
 			[cell drawWithFrame:cellRect inView:self];
 			
 		}

@@ -107,18 +107,18 @@ static char observerKey;
 		// result in a retain cycle.
 		observer = [NoodleGlue glueWithBlock:
 					^(NoodleGlue *glue, id object) {
-						[blockSelf setFireDate:(NSDate *)objc_getAssociatedObject(blockSelf, &originalDateKey)];
+						blockSelf.fireDate = (NSDate *)objc_getAssociatedObject(blockSelf, &originalDateKey);
 					}
 					cleanupBlock:
 					^(NoodleGlue *glue) {
 						[[NSNotificationCenter defaultCenter] removeObserver:glue];
-						[[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:glue];
+						[[NSWorkspace sharedWorkspace].notificationCenter removeObserver:glue];
 					}];
 		
 		objc_setAssociatedObject(self, &observerKey, observer, OBJC_ASSOCIATION_RETAIN);
 		
 		[[NSNotificationCenter defaultCenter] addObserver:observer selector:@selector(invoke:) name:NSSystemTimeZoneDidChangeNotification object:nil];
-		[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:observer selector:@selector(invoke:) name:NSWorkspaceDidWakeNotification object:nil];
+		[[NSWorkspace sharedWorkspace].notificationCenter addObserver:observer selector:@selector(invoke:) name:NSWorkspaceDidWakeNotification object:nil];
 	}
 	return self;
 }

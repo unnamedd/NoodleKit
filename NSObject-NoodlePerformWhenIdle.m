@@ -61,8 +61,8 @@ CG_EXTERN CFTimeInterval CGEventSourceSecondsSinceLastEventType( CGEventSourceSt
 		
 		signature = [self methodSignatureForSelector:@selector(performSelector:withObject:afterSystemIdleTime:withinTimeLimit:startTime:)];
 		invocation = [NSInvocation invocationWithMethodSignature:signature];
-		[invocation setSelector:@selector(performSelector:withObject:afterSystemIdleTime:withinTimeLimit:startTime:)];
-		[invocation setTarget:self];
+		invocation.selector = @selector(performSelector:withObject:afterSystemIdleTime:withinTimeLimit:startTime:);
+		invocation.target = self;
 		[invocation setArgument:&aSelector atIndex:2];
 		[invocation setArgument:&anArgument atIndex:3];
 		[invocation setArgument:&delay atIndex:4];

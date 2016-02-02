@@ -22,7 +22,7 @@
 {
     if ((self = [super init]) != nil)
     {
-        [self setDrawBlock:block];
+        self.drawBlock = block;
     }
     return self;
 }

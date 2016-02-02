@@ -101,10 +101,10 @@
 		NSAffineTransform	*transform;
 		NSColor				*color;
 		
-		if ((_cachedImage == nil) || !NSEqualSizes(_fullFrame.size, [_cachedImage size]))
+		if ((_cachedImage == nil) || !NSEqualSizes(_fullFrame.size, _cachedImage.size))
 		{
 			_cachedImage = [[NSImage alloc] initWithSize:_fullFrame.size];
-			[_cachedImage setFlipped:[controlView isFlipped]];
+			[_cachedImage setFlipped:controlView.flipped];
 		}
 		
 		[_cachedImage lockFocus];
@@ -149,7 +149,7 @@
 {
 	[super encodeWithCoder:encoder];
 	
-	if ([encoder allowsKeyedCoding])
+	if (encoder.allowsKeyedCoding)
 	{
 		[encoder encodeObject:@(_spanningEnabled) forKey:SPANNING_ENABLED_KEY];
 	}
@@ -165,7 +165,7 @@
 	{
 		id			value;
 		
-		if ([decoder allowsKeyedCoding])
+		if (decoder.allowsKeyedCoding)
 		{
 			value = [decoder decodeObjectForKey:SPANNING_ENABLED_KEY];
 		}
@@ -207,7 +207,7 @@
 {
 	[super encodeWithCoder:encoder];
 	
-	if ([encoder allowsKeyedCoding])
+	if (encoder.allowsKeyedCoding)
 	{
 		[encoder encodeObject:@(_showsStickyRowHeader) forKey:SHOWS_STICKY_ROW_HEADER_KEY];
 	}
@@ -223,7 +223,7 @@
 	{
 		id			value;
 		
-		if ([decoder allowsKeyedCoding])
+		if (decoder.allowsKeyedCoding)
 		{
 			value = [decoder decodeObjectForKey:SHOWS_STICKY_ROW_HEADER_KEY];
 		}
@@ -233,7 +233,7 @@
 		}
 		_showsStickyRowHeader = [value boolValue];
 		
-		for (NSTableColumn *column in [self tableColumns])
+		for (NSTableColumn *column in self.tableColumns)
 		{
 			if ([column isKindOfClass:[NoodleTableColumn class]])
 			{
@@ -259,7 +259,7 @@
 {
 	[super removeTableColumn:column];
 	
-	for (NSTableColumn *column in [self tableColumns])
+	for (NSTableColumn *column in self.tableColumns)
 	{
 		if ([column isKindOfClass:[NoodleTableColumn class]])
 		{
@@ -273,7 +273,7 @@
 
 - (void)setRowSpanningEnabledForCapableColumns:(BOOL)flag
 {
-	for (id column in [self tableColumns])
+	for (id column in self.tableColumns)
 	{
 		if ([column respondsToSelector:@selector(setRowSpanningEnabled:)])
 		{
@@ -289,7 +289,7 @@
 {
 	NSRect			rect;
 	
-	[[self gridColor] set];
+	[self.gridColor set];
 	
 	if ((gridMask & NSTableViewSolidHorizontalGridLineMask) != 0)
 	{
@@ -314,8 +314,8 @@
 		NoodleIndexSetEnumerator	*enumerator;
 		NSInteger					i;
 		
-		enumerator = [[self columnIndexesInRect:aRect] indexEnumerator];
-		while ((i = [enumerator nextIndex]) != NSNotFound)
+		enumerator = [self columnIndexesInRect:aRect].indexEnumerator;
+		while ((i = enumerator.nextIndex) != NSNotFound)
 		{
 			rect = [self rectOfColumn:i];
 			if (NSMaxX(rect) <= NSMaxX(aRect))
@@ -333,7 +333,7 @@
 {
 	NSUInteger					origGridMask;
 		
-	origGridMask = [self gridStyleMask];
+	origGridMask = self.gridStyleMask;
 	
 	if (_hasSpanningColumns && ((origGridMask & NSTableViewSolidHorizontalGridLineMask) != 0))
 	{
@@ -351,9 +351,9 @@
 		// Grab the indexes of all the spanning columns.
 		columnIndex = 0;
 		columnIndexes = [NSMutableIndexSet indexSet];
-		for (NSTableColumn *column in [self tableColumns])
+		for (NSTableColumn *column in self.tableColumns)
 		{
-			if ([column isRowSpanningEnabled])
+			if (column.rowSpanningEnabled)
 			{
 				[columnIndexes addIndex:columnIndex];
 			}
@@ -366,14 +366,14 @@
 		// Then we draw the horizontal grid line at the bottom of a span. We are trying to find the maximal
 		// regions to send to the grid drawing routine as doing it cell by cell incurs a bit of overhead.
 		startColumnIndex = 0;
-		enumerator = [columnIndexes indexEnumerator];
-		while ((columnIndex = [enumerator nextIndex]) != NSNotFound)
+		enumerator = columnIndexes.indexEnumerator;
+		while ((columnIndex = enumerator.nextIndex) != NSNotFound)
 		{
 			// This column is the right edge of this region (which is up to the next spanning column)
 			endColumnIndex = [columnIndexes indexGreaterThanIndex:columnIndex];
 			if (endColumnIndex == NSNotFound)
 			{
-				endColumnIndex = [self numberOfColumns] - 1;
+				endColumnIndex = self.numberOfColumns - 1;
 			}
 			else
 			{
@@ -431,9 +431,9 @@
 {
 	NSTableColumn				*column;
 	
-	column = [self tableColumns][columnIndex];	
+	column = self.tableColumns[columnIndex];	
 
-	if (!_isDrawingStickyRow && [column isRowSpanningEnabled])
+	if (!_isDrawingStickyRow && column.rowSpanningEnabled)
 	{
 		NSRange		range;
 	
@@ -463,16 +463,16 @@
 				[self selectRowIndexes:[NSIndexSet indexSetWithIndex:start] byExtendingSelection:YES];
 			}
 			
-			spanningCell = [column spanningCell];
-			[spanningCell setCell:cell];
+			spanningCell = column.spanningCell;
+			spanningCell.cell = cell;
 
 			// The full frame is the rect encompassing the first and last rows of the span.
-			[spanningCell setFullFrame:NSUnionRect([self frameOfCellAtColumn:columnIndex row:start],
-												   [self frameOfCellAtColumn:columnIndex row:end])];
-			[spanningCell setStartIndex:start];
-			[spanningCell setEndIndex:end];				
+			spanningCell.fullFrame = NSUnionRect([self frameOfCellAtColumn:columnIndex row:start],
+												   [self frameOfCellAtColumn:columnIndex row:end]);
+			spanningCell.startIndex = start;
+			spanningCell.endIndex = end;				
 			
-			[spanningCell setBackgroundColor:[self backgroundColor]];
+			spanningCell.backgroundColor = self.backgroundColor;
 
 			return spanningCell;
 		}
@@ -491,12 +491,12 @@
 		NSInteger			columnIndex;
 		NSTableColumn		*column;
 		
-		point = [event locationInWindow];
+		point = event.locationInWindow;
 		point = [self convertPoint:point fromView:nil];
 		
 		columnIndex = [self columnAtPoint:point];
-		column = [self tableColumns][columnIndex];
-		if ([column isRowSpanningEnabled])
+		column = self.tableColumns[columnIndex];
+		if (column.rowSpanningEnabled)
 		{
 			return;
 		}
@@ -511,7 +511,7 @@
 	
 	// All that needs to be done to enable the sticky row header functionality (bulk of the work
 	// done in the NSTableView category)
-	if ([self showsStickyRowHeader])
+	if (self.showsStickyRowHeader)
 	{
 		[self drawStickyRowHeader];
 	}
@@ -519,11 +519,11 @@
 	if (_hasSpanningColumns)
 	{
 		// Clean up any cached data. Don't want to keep stale cache data around.
-		for (NSTableColumn *column in [self tableColumns])
+		for (NSTableColumn *column in self.tableColumns)
 		{
-			if ([column isRowSpanningEnabled])
+			if (column.rowSpanningEnabled)
 			{
-				[[column spanningCell] _clearOutCaches];
+				[column.spanningCell _clearOutCaches];
 			}
 		}
 	}

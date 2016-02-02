@@ -59,7 +59,7 @@
 {
 	if ((self = [super initWithCoder:decoder]) != nil)
 	{
-		if ([decoder allowsKeyedCoding])
+		if (decoder.allowsKeyedCoding)
 		{
 			_lineNumber = [[decoder decodeObjectForKey:NOODLE_LINE_CODING_KEY] unsignedIntegerValue];
 		}
@@ -75,7 +75,7 @@
 {
 	[super encodeWithCoder:encoder];
 	
-	if ([encoder allowsKeyedCoding])
+	if (encoder.allowsKeyedCoding)
 	{
 		[encoder encodeObject:@(_lineNumber) forKey:NOODLE_LINE_CODING_KEY];
 	}

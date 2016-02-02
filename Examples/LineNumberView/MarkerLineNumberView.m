@@ -44,12 +44,12 @@
 
 - (void)setRuleThickness:(CGFloat)thickness
 {
-	[super setRuleThickness:thickness];
+	super.ruleThickness = thickness;
 	
 	// Overridden to reset the size of the marker image forcing it to redraw with the new width.
 	// If doing this in a non-subclass of NoodleLineNumberView, you can set it to post frame 
 	// notifications and listen for them.
-	[markerImage setSize:NSMakeSize(thickness, MARKER_HEIGHT)];	
+	markerImage.size = NSMakeSize(thickness, MARKER_HEIGHT);
 }
 
 - (void)drawMarkerImageIntoRep:(id)rep
@@ -74,7 +74,7 @@
 	
 	[[NSColor colorWithCalibratedRed:0 green:0.44 blue:0.8 alpha:1.0] set];
 	
-	[path setLineWidth:2.0];
+	path.lineWidth = 2.0;
 	[path stroke];
 }
 
@@ -86,7 +86,7 @@
 		
 		markerImage = [[NSImage alloc] initWithSize:size];
 		rep = [[NSCustomImageRep alloc] initWithDrawSelector:@selector(drawMarkerImageIntoRep:) delegate:self];
-		[rep setSize:size];
+		rep.size = size;
 		[markerImage addRepresentation:rep];
 		[rep release];
 	}
@@ -98,7 +98,7 @@
 	NSPoint					location;
 	NSUInteger				line;
 	
-	location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+	location = [self convertPoint:theEvent.locationInWindow fromView:nil];
 	line = [self lineNumberForLocation:location.y];
 	
 	if (line != NSNotFound)
@@ -115,7 +115,7 @@
 		{
 			marker = [[NoodleLineNumberMarker alloc] initWithRulerView:self
 															 lineNumber:line
-																  image:[self markerImageWithSize:NSMakeSize([self ruleThickness], MARKER_HEIGHT)]
+																  image:[self markerImageWithSize:NSMakeSize(self.ruleThickness, MARKER_HEIGHT)]
 														   imageOrigin:NSMakePoint(0, MARKER_HEIGHT / 2)];
 			[self addMarker:marker];
 			[marker release];

@@ -47,7 +47,7 @@
 	if ((self = [super init]) != nil)
 	{
 		_currentIndex = 0;
-		_count = [set count];
+		_count = set.count;
 		_indexes = (NSUInteger *)malloc(sizeof(NSUInteger) * _count);
 		
 		[set getIndexes:_indexes maxCount:_count inIndexRange:nil];

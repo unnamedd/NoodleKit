@@ -38,12 +38,12 @@
 - (void)awakeFromNib
 {
     lineNumberView = [[MarkerLineNumberView alloc] initWithScrollView:scrollView];
-    [scrollView setVerticalRulerView:lineNumberView];
-    [scrollView setHasHorizontalRuler:NO];
+    scrollView.verticalRulerView = lineNumberView;
+    scrollView.hasHorizontalRuler = NO;
     [scrollView setHasVerticalRuler:YES];
     [scrollView setRulersVisible:YES];
 	
-    [scriptView setFont:[NSFont userFixedPitchFontOfSize:[NSFont smallSystemFontSize]]];
+    scriptView.font = [NSFont userFixedPitchFontOfSize:[NSFont smallSystemFontSize]];
 }
 
 @end

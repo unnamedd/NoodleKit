@@ -41,9 +41,9 @@
         @[@{NSViewAnimationTargetKey: self,
             NSViewAnimationEndFrameKey: [NSValue valueWithRect:frameRect]}]];
     
-    [animation setDuration:duration];
-    [animation setAnimationBlockingMode:NSAnimationBlocking];
-    [animation setAnimationCurve:NSAnimationLinear];
+    animation.duration = duration;
+    animation.animationBlockingMode = NSAnimationBlocking;
+    animation.animationCurve = NSAnimationLinear;
     [animation startAnimation];
     
 }
@@ -56,25 +56,25 @@
     NSRect          frame;
     BOOL            isOneShot;
     
-    frame = [self frame];
+    frame = self.frame;
 
-    isOneShot = [self isOneShot];
+    isOneShot = self.oneShot;
 	if (isOneShot)
 	{
-		[self setOneShot:NO];
+		self.oneShot = NO;
 	}
     
-	if ([self windowNumber] <= 0)
+	if (self.windowNumber <= 0)
 	{
 		CGFloat		alpha;
 		
         // Force creation of window device by putting it on-screen. We make it transparent to minimize the chance of
 		// visible flicker.
-		alpha = [self alphaValue];
-		[self setAlphaValue:0.0];
+		alpha = self.alphaValue;
+		self.alphaValue = 0.0;
         [self orderBack:self];
         [self orderOut:self];
-		[self setAlphaValue:alpha];
+		self.alphaValue = alpha;
 	}
     
     image = [[NSImage alloc] initWithSize:frame.size];
@@ -82,26 +82,26 @@
     // Grab the window's pixels
     NSCopyBits([self gState], NSMakeRect(0.0, 0.0, frame.size.width, frame.size.height), NSZeroPoint);
     [image unlockFocus];
-	[image setCacheMode:NSImageCacheNever];
+	image.cacheMode = NSImageCacheNever;
     
     zoomWindow = [[NSWindow alloc] initWithContentRect:rect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
-    [zoomWindow setBackgroundColor:[NSColor colorWithDeviceWhite:0.0 alpha:0.0]];
-    [zoomWindow setHasShadow:[self hasShadow]];
-	[zoomWindow setLevel:[self level]];
+    zoomWindow.backgroundColor = [NSColor colorWithDeviceWhite:0.0 alpha:0.0];
+    zoomWindow.hasShadow = self.hasShadow;
+	zoomWindow.level = self.level;
     [zoomWindow setOpaque:NO];
     [zoomWindow setReleasedWhenClosed:YES];
     [zoomWindow useOptimizedDrawing:YES];
     
     imageView = [[NSImageView alloc] initWithFrame:[zoomWindow contentRectForFrameRect:frame]];
-    [imageView setImage:image];
-    [imageView setImageFrameStyle:NSImageFrameNone];
-    [imageView setImageScaling:NSScaleToFit];
-    [imageView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
+    imageView.image = image;
+    imageView.imageFrameStyle = NSImageFrameNone;
+    imageView.imageScaling = NSScaleToFit;
+    imageView.autoresizingMask = NSViewWidthSizable|NSViewHeightSizable;
     
-    [zoomWindow setContentView:imageView];
+    zoomWindow.contentView = imageView;
     
     // Reset one shot flag
-    [self setOneShot:isOneShot];
+    self.oneShot = isOneShot;
     
     return zoomWindow;
 }
@@ -111,12 +111,12 @@
     NSRect              frame;
     NSWindow            *zoomWindow;
 
-    if ([self isVisible])
+    if (self.visible)
     {
         return;
     }
         
-    frame = [self frame];
+    frame = self.frame;
     
     zoomWindow = [self _createZoomWindowWithRect:startRect];
    
@@ -133,9 +133,9 @@
     NSRect              frame;
     NSWindow            *zoomWindow;
     
-    frame = [self frame];
+    frame = self.frame;
     
-    if (![self isVisible])
+    if (!self.visible)
     {
         return;
     }

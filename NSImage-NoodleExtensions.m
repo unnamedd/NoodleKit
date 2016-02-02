@@ -33,7 +33,7 @@
 
 - (void)drawAdjustedAtPoint:(NSPoint)aPoint fromRect:(NSRect)srcRect operation:(NSCompositingOperation)op fraction:(CGFloat)delta
 {
-	NSSize		size = [self size];
+	NSSize		size = self.size;
 	
 	[self drawAdjustedInRect:NSMakeRect(aPoint.x, aPoint.y, size.width, size.height) fromRect:srcRect operation:op fraction:delta];
 }
@@ -44,7 +44,7 @@
 	BOOL				contextIsFlipped;
 	
 	context = [NSGraphicsContext currentContext];
-	contextIsFlipped = [context isFlipped];
+	contextIsFlipped = context.flipped;
 	
 	if (contextIsFlipped)
 	{
@@ -76,7 +76,7 @@
 	{
 		NSImage		*newImage;
 		
-		newImage = [[NSImage alloc] initWithSize:[self size]];
+		newImage = [[NSImage alloc] initWithSize:self.size];
 		[newImage lockFocus];
 		[self drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeCopy fraction:1.0];
 		[newImage unlockFocus];

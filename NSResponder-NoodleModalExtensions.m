@@ -31,12 +31,12 @@
 
 - (void)confirmModal:(id)sender
 {
-	[[self nextResponder] confirmModal:sender];
+	[self.nextResponder confirmModal:sender];
 }
 		
 - (void)cancelModal:(id)sender
 {
-	[[self nextResponder] cancelModal:sender];
+	[self.nextResponder cancelModal:sender];
 }
 
 @end
@@ -45,23 +45,23 @@
 
 - (BOOL)stopModalWindowOrSheetWithCode:(NSInteger)returnCode sender:(id)sender
 {
-	if ([NSApp modalWindow] == self)
+	if (NSApp.modalWindow == self)
 	{
 		[self orderOut:sender];
 		[NSApp stopModalWithCode:returnCode];
 		return YES;
 	}
-	else if ([self isSheet])
+	else if (self.sheet)
 	{
 		[self orderOut:sender];			
 		[NSApp endSheet:self returnCode:returnCode];
 		return YES;
 	}
-	else if ([self attachedSheet] != nil)
+	else if (self.attachedSheet != nil)
 	{
 		NSWindow	*sheet;
 		
-		sheet = [self attachedSheet];
+		sheet = self.attachedSheet;
 		[sheet orderOut:sender];
 		[NSApp endSheet:sheet returnCode:returnCode];
 	}	
@@ -72,7 +72,7 @@
 {
 	if (![self stopModalWindowOrSheetWithCode:NSOKButton sender:sender])
 	{
-		[[self nextResponder] confirmModal:sender];
+		[self.nextResponder confirmModal:sender];
 	}
 }
 
@@ -80,7 +80,7 @@
 {
 	if (![self stopModalWindowOrSheetWithCode:NSCancelButton sender:sender])
 	{
-		[[self nextResponder] cancelModal:self];
+		[self.nextResponder cancelModal:self];
 	}
 }
 

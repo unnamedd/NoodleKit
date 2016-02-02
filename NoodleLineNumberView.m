@@ -62,7 +62,7 @@
         _lineIndices = [[NSMutableArray alloc] init];
 		_linesToMarkers = [[NSMutableDictionary alloc] init];
 		
-        [self setClientView:[aScrollView documentView]];
+        self.clientView = aScrollView.documentView;
     }
     return self;
 }
@@ -71,7 +71,7 @@
 {
     _lineIndices = [[NSMutableArray alloc] init];
 	_linesToMarkers = [[NSMutableDictionary alloc] init];
-	[self setClientView:[[self scrollView] documentView]];
+	self.clientView = self.scrollView.documentView;
 }
 
 - (void)dealloc
@@ -98,16 +98,16 @@
 {
 	id		oldClientView;
 	
-	oldClientView = [self clientView];
+	oldClientView = self.clientView;
 	
     if ((oldClientView != aView) && [oldClientView isKindOfClass:[NSTextView class]])
     {
-		[[NSNotificationCenter defaultCenter] removeObserver:self name:NSTextStorageDidProcessEditingNotification object:[(NSTextView *)oldClientView textStorage]];
+		[[NSNotificationCenter defaultCenter] removeObserver:self name:NSTextStorageDidProcessEditingNotification object:((NSTextView *)oldClientView).textStorage];
     }
-    [super setClientView:aView];
+    super.clientView = aView;
     if ((aView != nil) && [aView isKindOfClass:[NSTextView class]])
     {
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textStorageDidProcessEditing:) name:NSTextStorageDidProcessEditingNotification object:[(NSTextView *)aView textStorage]];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textStorageDidProcessEditing:) name:NSTextStorageDidProcessEditingNotification object:((NSTextView *)aView).textStorage];
 
 		[self invalidateLineIndicesFromCharacterIndex:0];
     }
@@ -133,10 +133,10 @@
     NSTextStorage       *storage;
     NSRange             range;
     
-    storage = [notification object];
+    storage = notification.object;
 
     // Invalidate the line indices. They will be recalculated and re-cached on demand.
-    range = [storage editedRange];
+    range = storage.editedRange;
     if (range.location != NSNotFound)
     {
         [self invalidateLineIndicesFromCharacterIndex:range.location];
@@ -148,7 +148,7 @@
 {
     id              view;
     
-    view = [self clientView];
+    view = self.clientView;
     
     if ([view isKindOfClass:[NSTextView class]])
     {
@@ -157,8 +157,8 @@
         CGFloat         oldThickness, newThickness;
         
         text = [view string];
-        stringLength = [text length];
-        count = [_lineIndices count];
+        stringLength = text.length;
+        count = _lineIndices.count;
 
         charIndex = 0;
         lineIndex = [self lineNumberForCharacterIndex:_invalidCharacterIndex inText:text];
@@ -190,15 +190,15 @@
         _invalidCharacterIndex = NSUIntegerMax;
 
         // Check if text ends with a new line.
-        [text getLineStart:NULL end:&lineEnd contentsEnd:&contentEnd forRange:NSMakeRange([[_lineIndices lastObject] unsignedIntegerValue], 0)];
+        [text getLineStart:NULL end:&lineEnd contentsEnd:&contentEnd forRange:NSMakeRange([_lineIndices.lastObject unsignedIntegerValue], 0)];
         if (contentEnd < lineEnd)
         {
             [_lineIndices addObject:@(charIndex)];
         }
 
         // See if we need to adjust the width of the view
-        oldThickness = [self ruleThickness];
-        newThickness = [self requiredThickness];
+        oldThickness = self.ruleThickness;
+        newThickness = self.requiredThickness;
         if (fabs(oldThickness - newThickness) > 1)
         {
 			NSInvocation			*invocation;
@@ -206,8 +206,8 @@
 			// Not a good idea to resize the view during calculations (which can happen during
 			// display). Do a delayed perform (using NSInvocation since arg is a float).
 			invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:@selector(setRuleThickness:)]];
-			[invocation setSelector:@selector(setRuleThickness:)];
-			[invocation setTarget:self];
+			invocation.selector = @selector(setRuleThickness:);
+			invocation.target = self;
 			[invocation setArgument:&newThickness atIndex:2];
 			
 			[invocation performSelector:@selector(invoke) withObject:nil afterDelay:0.0];
@@ -233,7 +233,7 @@
 	
     // Binary search
     left = 0;
-    right = [lines count];
+    right = lines.count;
 
     while ((right - left) > 1)
     {
@@ -261,13 +261,13 @@
     NSFont  *font;
     NSColor *color;
     
-    font = [self font];    
+    font = self.font;    
     if (font == nil)
     {
         font = [self defaultFont];
     }
     
-    color = [self textColor];
+    color = self.textColor;
     if (color == nil)
     {
         color = [self defaultTextColor];
@@ -281,13 +281,13 @@
     NSFont  *font;
     NSColor *color;
     
-    font = [self font];    
+    font = self.font;    
     if (font == nil)
     {
         font = [self defaultFont];
     }
     
-    color = [self alternateTextColor];
+    color = self.alternateTextColor;
     if (color == nil)
     {
         color = [self defaultAlternateTextColor];
@@ -302,7 +302,7 @@
     NSMutableString     *sampleString;
     NSSize              stringSize;
     
-    lineCount = [[self lineIndices] count];
+    lineCount = [self lineIndices].count;
     digits = 1;
     if (lineCount > 0)
     {
@@ -329,7 +329,7 @@
     id			view;
 	NSRect		bounds;
 
-	bounds = [self bounds];
+	bounds = self.bounds;
 
 	if (_backgroundColor != nil)
 	{
@@ -340,7 +340,7 @@
 		[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMaxX(bounds) - 0.5, NSMinY(bounds)) toPoint:NSMakePoint(NSMaxX(bounds) - 0.5, NSMaxY(bounds))];
 	}
 	
-    view = [self clientView];
+    view = self.clientView;
 	
     if ([view isKindOfClass:[NSTextView class]])
     {
@@ -364,7 +364,7 @@
         nullRange = NSMakeRange(NSNotFound, 0);
 		
 		yinset = [view textContainerInset].height;        
-        visibleRect = [[[self scrollView] contentView] bounds];
+        visibleRect = self.scrollView.contentView.bounds;
 
         textAttributes = [self textAttributes];
 		
@@ -378,7 +378,7 @@
         // It doesn't show up in the glyphs so would not be accounted for.
         range.length++;
         
-        count = [lines count];
+        count = lines.count;
         
         for (line = [self lineNumberForCharacterIndex:range.location inText:text]; line < count; line++)
         {
@@ -401,13 +401,13 @@
 					
 					if (marker != nil)
 					{
-						markerImage = [marker image];
-						markerSize = [markerImage size];
+						markerImage = marker.image;
+						markerSize = markerImage.size;
 						markerRect = NSMakeRect(0.0, 0.0, markerSize.width, markerSize.height);
 
 						// Marker is flush right and centered vertically within the line.
-						markerRect.origin.x = NSWidth(bounds) - [markerImage size].width - 1.0;
-						markerRect.origin.y = ypos + NSHeight(rects[0]) / 2.0 - [marker imageOrigin].y;
+						markerRect.origin.x = NSWidth(bounds) - markerImage.size.width - 1.0;
+						markerRect.origin.y = ypos + NSHeight(rects[0]) / 2.0 - marker.imageOrigin.y;
 
 						[markerImage drawInRect:markerRect fromRect:NSMakeRect(0, 0, markerSize.width, markerSize.height) operation:NSCompositeSourceOver fraction:1.0];
 					}
@@ -454,8 +454,8 @@
 	NSMutableArray	*lines;
 	id				view;
     
-	view = [self clientView];
-	visibleRect = [[[self scrollView] contentView] bounds];
+	view = self.clientView;
+	visibleRect = self.scrollView.contentView.bounds;
 	
 	lines = [self lineIndices];
     
@@ -466,7 +466,7 @@
 		nullRange = NSMakeRange(NSNotFound, 0);
 		layoutManager = [view layoutManager];
 		container = [view textContainer];
-		count = [lines count];
+		count = lines.count;
 		
 		for (line = 0; line < count; line++)
 		{
@@ -508,7 +508,7 @@
 {
 	if ([aMarker isKindOfClass:[NoodleLineNumberMarker class]])
 	{
-		_linesToMarkers[@([(NoodleLineNumberMarker *)aMarker lineNumber] - 1)] = aMarker;
+		_linesToMarkers[@(((NoodleLineNumberMarker *)aMarker).lineNumber - 1)] = aMarker;
 	}
 	else
 	{
@@ -520,7 +520,7 @@
 {
 	if ([aMarker isKindOfClass:[NoodleLineNumberMarker class]])
 	{
-		[_linesToMarkers removeObjectForKey:@([(NoodleLineNumberMarker *)aMarker lineNumber] - 1)];
+		[_linesToMarkers removeObjectForKey:@(((NoodleLineNumberMarker *)aMarker).lineNumber - 1)];
 	}
 	else
 	{
@@ -539,7 +539,7 @@
 {
 	if ((self = [super initWithCoder:decoder]) != nil)
 	{
-		if ([decoder allowsKeyedCoding])
+		if (decoder.allowsKeyedCoding)
 		{
 			_font = [decoder decodeObjectForKey:NOODLE_FONT_CODING_KEY];
 			_textColor = [decoder decodeObjectForKey:NOODLE_TEXT_COLOR_CODING_KEY];
@@ -563,7 +563,7 @@
 {
 	[super encodeWithCoder:encoder];
 	
-	if ([encoder allowsKeyedCoding])
+	if (encoder.allowsKeyedCoding)
 	{
 		[encoder encodeObject:_font forKey:NOODLE_FONT_CODING_KEY];
 		[encoder encodeObject:_textColor forKey:NOODLE_TEXT_COLOR_CODING_KEY];

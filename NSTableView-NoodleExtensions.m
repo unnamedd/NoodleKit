@@ -87,7 +87,7 @@ void NoodleClearRect(NSRect rect)
 	row = [self _previousStickyRow];
 	if (row != -1)
 	{
-		[stickyView setFrame:[self stickyRowHeaderRect]];
+		[stickyView setFrame:self.stickyRowHeaderRect];
 		[self _updateStickyRowHeaderImageWithRow:row];	
 	}
 	else
@@ -118,17 +118,18 @@ void NoodleClearRect(NSRect rect)
 		view = [[NSButton alloc] initWithFrame:NSZeroRect];
 		[view setEnabled:YES];
 		[view setBordered:NO];
-		[view setImagePosition:NSImageOnly];
-		[view setTitle:nil];
-		[[view cell] setHighlightsBy:NSNoCellMask];
-		[[view cell] setShowsStateBy:NSNoCellMask];
-		[[view cell] setImageScaling:NSImageScaleNone];
-		[[view cell] setImageDimsWhenDisabled:NO];
+		view.imagePosition = NSImageOnly;
+		view.title = @"";
+		NSButtonCell *buttonCell = view.cell;
+		buttonCell.highlightsBy = NSNoCellMask;
+		buttonCell.showsStateBy = NSNoCellMask;
+		buttonCell.imageScaling = NSImageScaleNone;
+		[buttonCell setImageDimsWhenDisabled:NO];
 		
 		[view setTag:NOODLE_STICKY_ROW_VIEW_TAG];
 		
-		[view setTarget:self];
-		[view setAction:@selector(scrollToStickyRow:)];
+		view.target = self;
+		view.action = @selector(scrollToStickyRow:);
 		
 		[self addSubview:view];
 	}
@@ -151,18 +152,18 @@ void NoodleClearRect(NSRect rect)
 	
 	rowRect = [self rectOfRow:row];
 	
-	[[[self backgroundColor] highlightWithLevel:0.5] set];
+	[[self.backgroundColor highlightWithLevel:0.5] set];
 	NSRectFill(rowRect);
 	
 	// PENDING: -drawRow:clipRect: is too smart for its own good. If the row is not visible,
 	//	this method won't draw anything. Useless for row caching.
 	//	[self drawRow:row clipRect:rowRect];
 	
-	count = [self numberOfColumns];
+	count = self.numberOfColumns;
 	for (colIndex = 0; colIndex < count; colIndex++)
 	{
 		if ((delegate == nil) ||
-			[delegate tableView:self shouldDisplayCellInStickyRowHeaderForTableColumn:[self tableColumns][colIndex] row:row])
+			[delegate tableView:self shouldDisplayCellInStickyRowHeaderForTableColumn:self.tableColumns[colIndex] row:row])
 		{
 			cell = [self preparedCellAtColumn:colIndex row:row];
 			cellRect = [self frameOfCellAtColumn:colIndex row:row];
@@ -170,7 +171,7 @@ void NoodleClearRect(NSRect rect)
 		}
 	}
 	
-	[[self gridColor] set];
+	[self.gridColor set];
 	[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMinX(rowRect), NSMaxY(rowRect)) toPoint:NSMakePoint(NSMaxX(rowRect), NSMaxY(rowRect))];
 }
 
@@ -204,14 +205,14 @@ void NoodleClearRect(NSRect rect)
 	// to put it there in the end anyways, why not reuse it?
 	image = [stickyView image];
 	
-	if ((image == nil) || !NSEqualSizes(rowRect.size, [image size]))
+	if ((image == nil) || !NSEqualSizes(rowRect.size, image.size))
 	{
 		image = [[NSImage alloc] initWithSize:rowRect.size];
-		[image setFlipped:[self isFlipped]];
+		[image setFlipped:self.flipped];
 		[stickyView setImage:image];
 	}
 	
-	visibleRect = [self visibleRect];
+	visibleRect = self.visibleRect;
 	
 	// Calculate a distance between the row header and the actual sticky row and normalize it 
 	// over the row height (plus some extra). We use this to do the fade in effect as you
@@ -234,7 +235,7 @@ void NoodleClearRect(NSRect rect)
 	transform = [NSAffineTransform transform];
 	[transform translateXBy:-NSMinX(rowRect) yBy:-NSMinY(rowRect)];
 	
-	transition = [self stickyRowHeaderTransition];
+	transition = self.stickyRowHeaderTransition;
 	if (transition == NoodleStickyRowTransitionFadeIn)
 	{
 		// Since we want to adjust the transparency based on position, we draw the row into an
@@ -245,10 +246,10 @@ void NoodleClearRect(NSRect rect)
 		// the unused alt image of the sticky view (which is a button) as a cache so we don't
 		// have to keep creating images. Yes, a little hackish.
 		rowImage = [stickyView alternateImage];
-		if ((rowImage == nil) || !NSEqualSizes(rowRect.size, [rowImage size]))
+		if ((rowImage == nil) || !NSEqualSizes(rowRect.size, rowImage.size))
 		{
 			rowImage = [[NSImage alloc] initWithSize:rowRect.size];
-			[rowImage setFlipped:[self isFlipped]];
+			[rowImage setFlipped:self.flipped];
 			
 			[stickyView setAlternateImage:rowImage];
 		}
@@ -304,7 +305,7 @@ void NoodleClearRect(NSRect rect)
 	NSRect			visibleRect;
 	NSInteger		row;
 	
-	visibleRect = [self visibleRect];
+	visibleRect = self.visibleRect;
 	row = [self rowAtPoint:visibleRect.origin];
 	
 	while (row >= 0)
@@ -324,11 +325,11 @@ void NoodleClearRect(NSRect rect)
 	NSInteger		row;
 	NSInteger		numberOfRows;
 	
-	visibleRect = [self visibleRect];
+	visibleRect = self.visibleRect;
 	row = [self rowAtPoint:visibleRect.origin];
 	if (row != -1)
 	{
-		numberOfRows = [self numberOfRows];
+		numberOfRows = self.numberOfRows;
 		while (++row < numberOfRows)
 		{
 			if ([self isRowSticky:row])
@@ -352,7 +353,7 @@ void NoodleClearRect(NSRect rect)
 		NSRect			visibleRect, rowRect;
 		
 		rowRect = [self rectOfRow:row];
-		visibleRect = [self visibleRect];
+		visibleRect = self.visibleRect;
 		
 		// Move it to the top of the visible area
 		rowRect.origin.y = NSMinY(visibleRect);
@@ -384,9 +385,9 @@ void NoodleClearRect(NSRect rect)
 	
 	dataSource = [self dataSource];
 	
-	column = [self tableColumns][columnIndex];
+	column = self.tableColumns[columnIndex];
 	
-	if ([column isRowSpanningEnabled])
+	if (column.rowSpanningEnabled)
 	{
 		originalObjectValue = [dataSource tableView:self objectValueForTableColumn:column row:rowIndex];
 		
@@ -404,7 +405,7 @@ void NoodleClearRect(NSRect rect)
 		}
 		start = i + 1;
 		
-		count = [self numberOfRows];
+		count = self.numberOfRows;
 		i = rowIndex + 1;
 		while (i < count)
 		{
