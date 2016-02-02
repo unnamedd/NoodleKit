@@ -65,7 +65,7 @@ typedef void		(^NoodleGlueCleanupBlock)(NoodleGlue *glue);
 // Initializes a glue object. glueBlock will be invoked when this object's -invoke: method is called with the argument
 // to -invoke: passed on as a parameter. cleanupBlock is invoked when this object is dealloc'ed/finalized with the 
 // glue object being dealloc'ed sent in as a parameter.
-- (instancetype)initWithBlock:(NoodleGlueBlock)glueBlock cleanupBlock:(NoodleGlueCleanupBlock)cleanupBlock NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithBlock:(NoodleGlueBlock)glueBlock cleanupBlock:(NoodleGlueCleanupBlock)cleanupBlock /*NS_DESIGNATED_INITIALIZER*/;
 
 // Invokes the main block. When using this in a target/selector situation, use this as the selector.
 - (void)invoke:(id)object;
