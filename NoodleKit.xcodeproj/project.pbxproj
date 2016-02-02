@@ -781,7 +781,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0720;
 			};
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "NoodleKit" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1098,6 +1098,7 @@
 				GCC_PREFIX_HEADER = NoodleKit_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@rpath";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.noodlesoft.${PRODUCT_NAME:rfc1034Identifier}";
 				PRODUCT_NAME = NoodleKit;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -1118,6 +1119,7 @@
 				GCC_PREFIX_HEADER = NoodleKit_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@rpath";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.noodlesoft.${PRODUCT_NAME:rfc1034Identifier}";
 				PRODUCT_NAME = NoodleKit;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -1126,6 +1128,7 @@
 		1DEB91B208733DA50010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1187,6 +1190,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.noodlesoft.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "Window Effects";
 			};
 			name = Debug;
@@ -1209,6 +1213,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.noodlesoft.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "Window Effects";
 				ZERO_LINK = NO;
 			};
@@ -1233,6 +1238,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = iToonz;
 			};
 			name = Debug;
@@ -1255,6 +1261,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = iToonz;
 				ZERO_LINK = NO;
 			};
@@ -1279,6 +1286,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.noodlesoft.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ModalResponderTest;
 			};
 			name = Debug;
@@ -1301,6 +1309,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.noodlesoft.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ModalResponderTest;
 				ZERO_LINK = NO;
 			};
@@ -1325,6 +1334,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.noodlesoft.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "StickyRowTableView Revue";
 			};
 			name = Debug;
@@ -1347,6 +1357,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.noodlesoft.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "StickyRowTableView Revue";
 				ZERO_LINK = NO;
 			};
@@ -1371,6 +1382,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.noodlesoft.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = LineNumberView;
 			};
 			name = Debug;
@@ -1393,6 +1405,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.noodlesoft.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = LineNumberView;
 				ZERO_LINK = NO;
 			};
@@ -1417,6 +1430,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = TimerLab;
 			};
 			name = Debug;
@@ -1439,6 +1453,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = TimerLab;
 				ZERO_LINK = NO;
 			};
@@ -1463,6 +1478,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ImageLab;
 			};
 			name = Debug;
@@ -1485,6 +1501,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ImageLab;
 				ZERO_LINK = NO;
 			};
